@@ -1,3 +1,1 @@
-from .EquipmentCard import *
-from .RoleCard import *
-from .PlayingCard import  *
+from .Card import *
