@@ -1,4 +1,5 @@
 import pygame
+import random
 from Network import Network
 import os, sys
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
@@ -24,7 +25,7 @@ drawUI = None
 other_player = [i for i in range(5)] # 나를 제외한 player의 number
 turn_over_button = None # turn over 해주는 button
 cards = [] # 현재 가지고 있는 카드
-players = None # 상대 플레이어들
+players = [] # 상대 플레이어들
 card_use_button = None # 오른쪽 card의 use button
 right_card_idx = -1 # 오른쪽에 card의 deck_idx
 
@@ -36,6 +37,9 @@ def available_player(board, right_card_idx, my_player_number, target_player_numb
             return False
     elif Setting.PLAYING_CARD[right_card_idx][0] == 'panic':
         if distance > 1:
+            return False
+    elif Setting.PLAYING_CARD[right_card_idx][0] == 'catBalu':
+        if len(board.players[target_player_number].cards) == 0:
             return False
     return True
 
@@ -49,19 +53,18 @@ def select_target_player(board, card_idx, my_player_number):
                         player_idx = other_player[i]
     return player_idx
 
-def select_target_card(board, idx, my_player_number):
+def select_target_card(board, card_idx, my_player_number):
     # 장착된 카드 선택 혹은 랜덤하게 상대 패 선택
     player_idx = -1
-
     while player_idx == -1:
         for event in pygame.event.get():
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 for i, player in enumerate(players):
                     if player.collidepoint(event.pos) and available_player(board, card_idx, my_player_number, i):
                         player_idx = other_player[i]
-    return player_idx
-
-    return 0
+    pick_card = random.choice(board.players[player_idx].cards)
+    print('pick_card: ', pick_card.idx)
+    return pick_card.idx
 
 def showCardOnRight(board, idx, cards):
     print('show')
@@ -113,6 +116,7 @@ def useCardOnRight(board, idx):
 
 def display_update(board, cards):
     cards.clear()
+    players.clear()
     # 상대방의 상태 update(Player 객체를 통해)
     for other_person in other_player:
         drawUI.update_player(board.players[other_person])
@@ -122,9 +126,16 @@ def display_update(board, cards):
         idx = 28 + i
         drawUI.update_card(idx, card)
     drawUI.draw_total()
+
+    # cards update
     for i, card in enumerate(board.players[my_player_number].cards):
         idx = 28 + i
         cards.append(drawUI.rects[idx])
+
+    # players update (player의 bullets)
+    for i, player_idx in enumerate(other_player):
+        idx = 6 * (i+1) -1
+        players.append(drawUI.rects[idx])
 
 
 
@@ -181,7 +192,11 @@ if __name__ == "__main__":
                             for idx, card in enumerate(cards):
                                 if card.collidepoint(event.pos):
                                     card_idx = board.players[my_player_number].cards[idx].idx
+                                    print(len(board.players[my_player_number].cards))
                                     board = network.send('discard {}'.format(card_idx))
+                                    print(len(board.players[my_player_number].cards))
+                                    display_update(board, cards)
+
                     else:
                         board = network.send('turn over')  # turn over
 
