@@ -22,6 +22,9 @@ class DrawUi:
         
         self.board = BoardSection([current_player] + other_player_list)
         
+        self.rects = {i:None for i in range(40)}
+        
+     
         
         
     def update_card(self,index,card):
@@ -50,13 +53,23 @@ class DrawUi:
             
         
     def draw_one(self,card,box,condition = -1):
-        print(self.cards_path + card.name + '.png')
+
         if condition == -1:
             image = pygame.image.load(self.cards_path + card.name + '.png')                
          
         image = pygame.transform.scale(image, (box.width, box.height))
         rect = image.get_rect()
         rect.center = (box.centerX,box.centerY)
+        self.rects[box.sectionNumber] = rect
+        
+        
+        
+        print(rect)
+        
+        
+        
+        
+        
         self.screen.blit(image, rect)
         return
     
