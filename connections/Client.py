@@ -5,6 +5,8 @@ sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 from Rule import Board
 from Rule import Setting
 
+from UI import BoardSection
+
 
 
 width = 500
@@ -12,10 +14,15 @@ height = 500
 win = pygame.display.set_mode((width, height))
 pygame.display.set_caption("Client")
 clientNumber = 0
+my_player_number = 0
 
+cnt_gun = 0
+cnt_bang = 0
+
+other_player = [i for i in range(5)] # 나를 제외한 player의 number
 turn_over_button = None # turn over 해주는 button
 cards = None # 현재 가지고 있는 카드
-players = None # 상대 playser
+players = None # 상대 플레이어들
 card_use_button = None # 오른쪽 card의 use button
 right_card_idx = -1 # 오른쪽에 card의 deck_idx
 
@@ -36,17 +43,29 @@ def select_target_player(board, right_card_idx, my_player_number):
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
             for i, player in enumerate(players):
                 if player.collidepoint(event.pos) and available_player(board, right_card_idx, my_player_number, i):
-                    player_idx = i
+                    player_idx = other_player[i]
     return player_idx
 
 def showCardOnRight(board, idx):
-    return 0
+    card = board.players[my_player_number].cards[idx]
+
+    # 해당 카드를 board의 오른쪽에 출력함
+
+    return card.idx
 
 # use card right
 # 예외 처리 중요 ex) 총 장착 여러개 안됨, bang 여러개 사용 못함
 def useCardOnRight(board, idx):
+    result = ''
+    card = board.players[my_player_number].cards[idx]
+    if card.name == 'bang':
+        target_player_idx = select_target_player(board, right_card_idx, my_player_number)
+        result = 'bang {} {} {}'.format(my_player_number, target_player_idx, right_card_idx)
 
-    return 0 # target이 필요하면 1 안필요하면 0
+    # bang 외의 다른것들 해보기
+
+
+    return result
 
 def discard_card(board, idx):
     return 0
@@ -54,11 +73,14 @@ def discard_card(board, idx):
 board = Board.Board(5)
 if __name__ == "__main__":
     run = True
-
-    network = Network("18.191.254.252", 5555)
-    my_player_number = network.id
+    #network = Network("18.191.254.252", 5555)
+    network = Network("127.0.0.1", 5555)
+    my_player_number = int(network.id)
+    print(my_player_number)
+    del other_player[my_player_number]
     clock = pygame.time.Clock()
-    phase = '0'
+    phase = '2'
+    print(board.deck[0].name)
 
     while run:
         clock.tick(60)
@@ -78,11 +100,9 @@ if __name__ == "__main__":
                             if card.collidepoint(event.pos):
                                 right_card_idx = showCardOnRight(board, i)
                         if card_use_button.collidepoint(event.pos):
-                            target_player_idx = -1
-                            hasTarget = useCardOnRight(board, right_card_idx)
-                            if hasTarget == True:
-                                target_player_idx = select_target_player(board, right_card_idx, my_player_number)
-                            board = network.send('bang {} {} {}'.format(my_player_number, target_player_idx, right_card_idx))
+                            board = network.send(useCardOnRight(board, right_card_idx))
+
+
 
                 # phase 3 (exceed card)
                 elif board.phase == '3':
@@ -90,7 +110,9 @@ if __name__ == "__main__":
                         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                             for idx, card in enumerate(cards):
                                 if card.collidepoint(event.pos):
-                                    discard_card(board,idx)
+                                    card_idx = board.players[my_player_number].cards[idx].idx
+                                    board = network.send('discard {} {}'.format(my_player_number, card_idx))
+
                     else:
                         board.phase = '4'
                 # phase 4 (turn over)
