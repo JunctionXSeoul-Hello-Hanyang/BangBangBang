@@ -1,8 +1,10 @@
 from pygame.locals import *
 import pygame
-import os
+import os,sys
 import time
-from UI import BoardSection
+from BoardSection import BoardSection
+sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
+from Card import Card
 
 class DrawUi:
 
