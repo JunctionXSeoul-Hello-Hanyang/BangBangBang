@@ -41,11 +41,12 @@ def available_player(board, right_card_idx, my_player_number, target_player_numb
 
 def select_target_player(board, card_idx, my_player_number):
     player_idx = -1
-    for event in pygame.event.get():
-        if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-            for i, player in enumerate(players):
-                if player.collidepoint(event.pos) and available_player(board, card_idx, my_player_number, i):
-                    player_idx = other_player[i]
+    while player_idx == -1:
+        for event in pygame.event.get():
+            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                for i, player in enumerate(players):
+                    if player.collidepoint(event.pos) and available_player(board, card_idx, my_player_number, i):
+                        player_idx = other_player[i]
     return player_idx
 
 def select_target_card(board, idx, my_player_number):
@@ -66,6 +67,7 @@ def showCardOnRight(board, idx, cards):
 def useCardOnRight(board, idx):
     result = ''
     card = Setting.PLAYING_CARD[idx]
+    print(card)
     if card[0] == 'bang':
         target_player_idx = select_target_player(board, idx, my_player_number)
         result = 'bang {} {}'.format(idx, target_player_idx)
@@ -129,7 +131,7 @@ if __name__ == "__main__":
 
     board = network.send('update')
     print(board.phase)
-    drawUI = DrawUi.DrawUi()
+    drawUI = DrawUi.DrawUi(my_player_number, other_player)
     display_update(board, cards)
     card_use_button = drawUI.rects[38]
     turn_over_button = drawUI.rects[39]
