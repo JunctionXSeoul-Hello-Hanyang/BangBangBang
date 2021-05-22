@@ -31,21 +31,22 @@ class DrawUi:
         index = self.board.player_dict[player.player_number]
         if index == 0:
             
-            self.update_card(self.UI_dict[index][0],Card(player.field.role,0,0,0,0)) # not yet
-            self.update_card(self.UI_dict[index][1],player.equipmentCards)
-            self.update_card(self.UI_dict[index][2],player.gunCard)
-            self.update_card(self.UI_dict[index][3],Card(str(player.field.bullets),0,0,0,0))
+            self.update_card(self.board.UI_dict[index][0],Card(player.field.role,0,0,0,0)) # not yet
+            self.update_card(self.board.UI_dict[index][1],player.field.equipmentCards)
+            self.update_card(self.board.UI_dict[index][2],player.field.gunCard)
+            self.update_card(self.board.UI_dict[index][3],Card(str(player.field.bullets),0,0,0,0))
                 
         else:
-            self.update_card(self.UI_dict[index][0],0)
-            self.update_card(self.UI_dict[index][1],Card(player.field.role,0,0,0,0))
-            self.update_card(self.UI_dict[index][2],player.equipmentCards)
-            self.update_card(self.UI_dict[index][3],Card(str(len(player.field.cards)),0,0,0,0))
-            self.update_card(self.UI_dict[index][4],player.gunCard)
-            self.update_card(self.UI_dict[index][5],Card(str(player.field.bullets),0,0,0,0))
+            self.update_card(self.board.UI_dict[index][0],0)
+            self.update_card(self.board.UI_dict[index][1],Card(player.field.role,0,0,0,0))
+            self.update_card(self.board.UI_dict[index][2],player.field.equipmentCards)
+            self.update_card(self.board.UI_dict[index][3],Card(str(len(player.field.cards)),0,0,0,0))
+            self.update_card(self.board.UI_dict[index][4],player.field.gunCard)
+            self.update_card(self.board.UI_dict[index][5],Card(str(player.field.bullets),0,0,0,0))
             
         
     def draw_one(self,card,box,condition = -1):
+        print(self.cards_path + card.name + '.png')
         if condition == -1:
             image = pygame.image.load(self.cards_path + card.name + '.png')                
          
@@ -66,7 +67,7 @@ class DrawUi:
             elif current.boardLocation.sectionNumber == 39:
                 current.card = Card("turnover",0,0,0,0)
                 
-            elif current.card == 0:
+            elif current.card == 0 or current.card == None:
                 current.card = Card("X",0,0,0,0)
             
             self.draw_one(current.card,current.boardLocation,condition)
