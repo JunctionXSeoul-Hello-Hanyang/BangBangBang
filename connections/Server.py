@@ -1,5 +1,6 @@
 import socket
 import pickle
+import random
 from _thread import *
 
 import sys
@@ -21,6 +22,38 @@ print("Waiting for a connection, Server Started")
 playersSocket = []
 currentPlayer = 0
 board = None
+
+# 현재 순서의 플레이어가 카드 한 장 뽑는 함수
+def drawCard():
+    # deck에서 카드 한 개 뽑음
+    drawedCard = board.deck.pop()
+
+    # 현재 차례의 플레이어를 선택해 해당 플레이어의 덱에 추가해준다.
+    curPlayer = board.players[board.whoseTurn]
+    curPlayer.cards.append(drawedCard)
+
+    # deck 비어있는 경우, 버려진 덱을 섞어서 채워준다.
+    if not board.deck:
+        random.shuffle(board.trashCan)
+        board.deck = board.trashCan
+        board.trashCan = []
+
+
+# 카드 사용 후에 버리는 함수
+# 매개변수의 경우 현재플레이어 덱에서의 카드 idx를 받게 된다.
+def handleAfterCardUsase(playerCardIdx):
+    curPlayer = board.players[board.whoseTurn]
+    trashCard = curPlayer.cards[playerCardIdx]
+
+    # 자신의 덱에서 카드 삭제
+    del curPlayer.cards[playerCardIdx]
+
+    # 쓰레기통에 해당 카드 삽입
+    board.trashCan.append(trashCard)
+
+
+
+
 
 def broadcast_board():
     for conn in playersSocket:
