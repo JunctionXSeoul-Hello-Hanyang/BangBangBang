@@ -57,6 +57,20 @@ BOARD_LIST = [
 [295, 110, 1051, 618],      # 39
 ]
 
+class BoardLocation:
+    def __init__(self, sectionNumber=0, width=0, height=0, centerX=0, centerY=0):
+        self.sectionNumber = sectionNumber
+        self.width = width
+        self.height = height
+        self.centerX = centerX
+        self.centerY = centerY
+        
+class BoardEntity:
+    def __init__(self, boardLocation=0, card = 0, player=0):
+        self.boardLocation = boardLocation
+        self.card = card
+        self.palyer = player
+
 class BoardSection:
     def __init__(self):
         self.boardSection = []
@@ -65,18 +79,5 @@ class BoardSection:
             boardLocation = BoardLocation(index, temp[0], temp[1], temp[2], temp[3])
             boardEntity = BoardEntity(boardLocation, 0, 0)
 
-            boardSection.append(BoardSection)
+            self.boardSection.append(boardEntity)
 
-class BoardEntity:
-    def __init__(self, boardLocation=0, card = 0, player=0):
-        self.boardLocation = boardLocation
-        self.card = card
-        self.palyer = player        
-
-class BoardLocation:
-    def __init__(self, sectionNumber=0, width=0, height=0, centerX=0, centerY=0):
-        self.sectionNumber = sectionNumber
-        self.width = width
-        self.height = height
-        self.centerX = centerX
-        self.centerY = centerY
