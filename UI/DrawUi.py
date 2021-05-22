@@ -6,6 +6,9 @@ from BoardSection import BoardSection
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 from Card import Card
 
+from tkinter import *
+from tkinter import messagebox
+
 class DrawUi:
 
     def __init__(self,current_player,other_player_list,X=1280,Y=720):
@@ -61,8 +64,7 @@ class DrawUi:
         
         
         
-        print(rect)
-        
+        print(rect)   
         
         
         
@@ -85,3 +87,7 @@ class DrawUi:
             
             self.draw_one(current.card,current.boardLocation,condition)
         pygame.display.update()
+
+    def popUp(self, message="a"):
+        Tk().wm_withdraw() #to hide the main window
+        messagebox.showinfo('Continue',message)
