@@ -13,7 +13,7 @@ clientNumber = 0
 
 if __name__ == "__main__":
     run = True
-    network = Network("127.0.0.1", 5555)
+    network = Network("18.191.254.252", 5555)
     clock = pygame.time.Clock()
     clock.tick(60)
 
