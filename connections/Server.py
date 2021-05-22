@@ -1,4 +1,5 @@
 import socket
+import pickle
 from _thread import *
 
 import sys
@@ -21,12 +22,13 @@ playersSocket = []
 currentPlayer = 0
 board = None
 
-def threaded_client(conn):
-    conn.send(str.encode("Connected"))
-    
-    # 맨 처음 게임판을 전달하는 작업
-    conn.sendall('전달해야되는 값')
+def broadcast_board():
+    for conn in playersSocket:
+        conn.sendall(pickle.dumps(board))
 
+def threaded_client(conn):
+    # conn.send(str.encode("Connected"))
+    
     reply = ""
     while True:
         # 여기선 서버의 경우 정보를 받는 경우에만 동작하게 된다. (턴제로)
@@ -37,19 +39,35 @@ def threaded_client(conn):
             if not data:
                 print("Disconnected")
                 break
-            else:
-                print("Received: ", reply)
-                print("Sending : ", reply)
+            
+            print("Received: ", reply)
+            print("Sending : ", reply)
 
-            conn.sendall(str.encode(reply))
+            # 특정 함수 처리
+
+            broadcast_board() # 변경 이후의 맵이 모든 클라이언트에 전달
         except:
             break
 
     print("Lost connection")
     conn.close()
 
-def broadcast_board(board):
 
+def handle(reply):
+    reply.name = reply.split(' ')
+
+    if reply.name[0].equals("bang"):
+    elif reply.name[0].equals("missed"):
+    elif reply.name[0].equals("beer"):
+    elif reply.name[0].equals("duel"):
+    elif reply.name[0].equals("indian"):
+    elif reply.name[0].equals("gatling"):
+    elif reply.name[0].equals("saloon"):
+    elif reply.name[0].equals("panic"):
+    elif reply.name[0].equals("generalstore"):
+    elif reply.name[0].equals("stagecoach"):
+    elif reply.name[0].equals("wellsfargo"):
+    elif reply.name[0].equals("catbalu"):
 
 
 while True:
@@ -63,6 +81,7 @@ while True:
     if currentPlayer == 5:
         print("Game Starting....")
         board = Board(5) # 게임판 생성
+        broadcast_board() # 게임판 시작 점 전부 뿌림
         for conn in playersSocket:
             start_new_thread(threaded_client, (conn, ))
 
