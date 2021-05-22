@@ -47,7 +47,7 @@ PLAYING_CARD = [
 
     # ConsumptionCard: 17
     # Gun: 8
-    ['schofield', 'J', 'C', 'EG'], ['schofield', 'Q', 'C', 'EG'], ['schofield', 'K', 'S', 'EG'], ['remington', 'A', 'C', 'EG'],
+    ['schofield', 'J', 'C', 'EG'], ['schofield', 'Q', 'C', 'EG'], ['schofield', 'K', 'S', 'EG'], ['carabine', 'A', 'C', 'EG'],
     ['remington', '5', 'S', 'EG'], ['winchester', '8', 'S', 'EG'], ['volcanic', '10', 'C', 'EG'], ['volcanic', '10', 'S', 'EG'],
     # Jail: 3
     ['jail', '4', 'H', 'E'], ['jail', '10', 'S', 'E'], ['jail', 'J', 'S', 'E'],
@@ -60,6 +60,8 @@ PLAYING_CARD = [
     # Dynamite: 1
     ['dynamite', '2', 'H', 'E'],
 ]
+
+GUN_RANGE = {'schofield':2, 'remington':3, 'winchester':5, 'volcanic':1, 'colt.45': 1, 'carabine':4}
 
 IMAGE_ROLE_PATH = '../UI/ImageAsset/roles/'
 IMAGE_PLAYINGCARD_PATH = '../UI/ImageAsset/cards/'
