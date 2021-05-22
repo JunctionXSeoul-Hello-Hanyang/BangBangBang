@@ -12,6 +12,10 @@ class Board:
         self.players = []
         self.trashCan = []
 
+        self.whoseTurn = 0
+        self.phase = ""
+
+
         # shuffle deck
         random.shuffle(Setting.PLAYING_CARD)
         for idx, card in enumerate(Setting.PLAYING_CARD):
@@ -25,6 +29,10 @@ class Board:
 
             self.players.append(Player.Player(player_number, init_bullets, init_role, None, self.deck[-init_bullets:]))
             del self.deck[-init_bullets:]
+
+
+
+
 
 
 
