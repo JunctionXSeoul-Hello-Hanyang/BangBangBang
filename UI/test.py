@@ -16,7 +16,7 @@ class Card:
         self.type = type
         self.idx = idx
 
-p1 = Player(4, 2,"outlaw" , "", [Card("",0,0,0,0),Card("",0,0,0,0),Card("",0,0,0,0)])
+p1 = Player(0, 2,"outlaw" , "", [Card("back-playing",0,0,0,0),Card("bang",0,0,0,0),Card("barrel",0,0,0,0)])
 
 ui = DrawUi(0,[1,2,3,4])
 

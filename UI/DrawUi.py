@@ -35,6 +35,10 @@ class DrawUi:
             self.update_card(self.board.UI_dict[index][1],player.field.equipmentCards)
             self.update_card(self.board.UI_dict[index][2],player.field.gunCard)
             self.update_card(self.board.UI_dict[index][3],Card(str(player.field.bullets),0,0,0,0))
+            
+            for i,card in enumerate(player.cards):
+                self.update_card(self.board.UI_dict[index][4+i],card)
+                
                 
         else:
             self.update_card(self.board.UI_dict[index][0],0)
