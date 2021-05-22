@@ -61,9 +61,7 @@ class DrawUi:
         rect = image.get_rect()
         rect.center = (box.centerX,box.centerY)
         self.rects[box.sectionNumber] = rect
-        
-        print(rect)       
-        
+                
         self.screen.blit(image, rect)
     
     def draw_total(self):
