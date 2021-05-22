@@ -57,6 +57,8 @@ BOARD_LIST = [
 [295, 110, 1051, 618],      # 39
 ]
 
+
+
 class BoardLocation:
     def __init__(self, sectionNumber=0, width=0, height=0, centerX=0, centerY=0):
         self.sectionNumber = sectionNumber

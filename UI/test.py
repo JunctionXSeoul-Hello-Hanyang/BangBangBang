@@ -4,9 +4,6 @@ import os
 import time
 
 ui = DrawUi()
-b_list   = BoardSection().boardSection
-
-print(b_list)
 
 path = "./ImageAsset/cards/"
 file_list = os.listdir(path) + os.listdir(path) + os.listdir(path)
@@ -21,10 +18,9 @@ class Card:
     
 
 
+for i in range(40):
+    ui.update_card(i,Card(file_list[i].replace(".png",""),0,0,0,0))
 
-
-input_list = [[Card(file_list[i].replace(".png",""),0,0,0,0),b_list[i].boardLocation] for i in range(40)]
-
-ui.update(input_list)
+ui.draw_total()
 
 time.sleep(5000)
