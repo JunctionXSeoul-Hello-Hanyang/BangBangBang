@@ -57,13 +57,35 @@ def showCardOnRight(board, idx):
 # 예외 처리 중요 ex) 총 장착 여러개 안됨, bang 여러개 사용 못함
 def useCardOnRight(board, idx):
     result = ''
-    card = board.players[my_player_number].cards[idx]
+    card = Setting.PLAYING_CARD[idx]
     if card.name == 'bang':
         target_player_idx = select_target_player(board, right_card_idx, my_player_number)
         result = 'bang {} {} {}'.format(my_player_number, target_player_idx, right_card_idx)
-
-    # bang 외의 다른것들 해보기
-
+    elif card.name == 'missed':
+        result = -1
+    elif card.name == 'beer':
+        result = 'beer {}'.format(my_player_number)
+    elif card.name == 'duel':
+        target_player_idx = select_target_player(board, right_card_idx, my_player_number)
+        result = 'duel {} {}'.format(my_player_number, target_player_idx)
+    elif card.name == 'indian':
+        result = 'indian {}'.format(my_player_number)
+    elif card.name == 'gatling':
+        result = 'gatling {}'.format(my_player_number)
+    elif card.name == 'saloon':
+        result = 'saloon {}'.format(my_player_number)
+    elif card.name == 'panic':
+        target_player_idx = select_target_player(board, right_card_idx, my_player_number)
+        result = 'panic {}'.format(my_player_number, target_player_idx)
+    elif card.name == 'catBalu':
+        target_player_idx = select_target_player(board, right_card_idx, my_player_number)
+        result = 'catBalu {}'.format(my_player_number, target_player_idx)
+    elif card.name == 'generalStore':
+        result = 'generalStore {}'.format(my_player_number)
+    elif card.name == 'stagecoach':
+        result = 'stagecoach {}'.format(my_player_number)
+    elif card.name == 'wellsFargo':
+        result = 'wellsFargo {}'.format(my_player_number)
 
     return result
 
@@ -100,7 +122,9 @@ if __name__ == "__main__":
                             if card.collidepoint(event.pos):
                                 right_card_idx = showCardOnRight(board, i)
                         if card_use_button.collidepoint(event.pos):
-                            board = network.send(useCardOnRight(board, right_card_idx))
+                            msg = useCardOnRight(board, right_card_idx)
+                            if msg != -1: # 사용할수 있는 카드인 경우
+                                board = network.send(msg)
 
 
 
