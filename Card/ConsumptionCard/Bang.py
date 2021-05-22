@@ -1,4 +1,4 @@
-from .. import ConsumptionCard
+from . import ConsumptionCard
 
 class Bang(ConsumptionCard):
     def __init__(self, image, name, description, number, trump_symbol):
