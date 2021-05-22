@@ -3,6 +3,10 @@ import pygame
 import os
 import time
 from BoardSection import BoardSection
+
+
+
+
 class DrawUi:
     def __init__(self,X=1280,Y=720,):
         self.cards_path = "./ImageAsset/cards/"
