@@ -1,4 +1,5 @@
-from Card import PlayingCard
+from . import EquipmentCard
+
 
 class EquipmentCard(PlayingCard):
     def __init__(self, image, name, description, number, trump_symbol):

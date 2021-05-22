@@ -1,4 +1,5 @@
-from Card import Card
+from . import EquipmentCard
+
 
 class RoleCard(Card):
     def __init__(self, image, name, description):
