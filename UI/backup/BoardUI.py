@@ -6,6 +6,7 @@ class BoardUI:
     def __init__(self, myName, playerName, BoardX=1280, BoardY=720):
         pygame.init()
 
+        self.myName = myName
         self.enemyStatusList = []
         i = 0
         for temp in playerName:
@@ -49,7 +50,7 @@ class BoardUI:
         i = "ERROR"
         
         for temp in self.enemyStatusList:
-            if temp.name is not playerName:
+            if temp.name != playerName:
                 continue
             
             i = "NOT ERROR"
@@ -67,3 +68,7 @@ class BoardUI:
             return -1
 
         return 0
+
+
+    def drawInteractionSection(self, cardName, useButton="NO_BUTTON"):
+        pass
