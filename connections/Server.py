@@ -40,17 +40,13 @@ def drawCard():
 
 
 # 카드 사용 후에 버리는 함수
-# 매개변수의 경우 현재플레이어 덱에서의 카드 idx를 받게 된다.
-def handleAfterCardUsase(playerCardIdx):
+# 매개변수의 경우 카드의 유니크 idx를 받는다.
+def handleAfterCardUsase(cardIdx):
     curPlayer = board.players[board.whoseTurn]
-    trashCard = curPlayer.cards[playerCardIdx]
-
-    # 자신의 덱에서 카드 삭제
-    del curPlayer.cards[playerCardIdx]
-
-    # 쓰레기통에 해당 카드 삽입
-    board.trashCan.append(trashCard)
-
+    for idx, card in enumerate(curPlayer.cards):
+        if card.idx == cardIdx:
+            board.trashCan.append(card) # 버려질 쓰레기통에 카드 삽입
+            del curPlayer.cards[idx] # 자신의 덱에서 카드 삭제
 
 
 
@@ -125,6 +121,10 @@ def actionBang(fromIndex, toIndex, cardIndex):
     
 def actionBeer(fromIndex, cardIndex)
     
+
+
+
+def actionCatbalu(cardIdx):
 
 
 
