@@ -7,7 +7,7 @@ NUMBER_OF_ROLE = {
     7: ['Sheriff', 'Deputy', 'Deputy', 'Outlaw', 'Outlaw', 'Outlaw', 'Renegade'],
 }
 
-# ConsumptionCard: 80
+# PlayingCard: 80
 # H: Heart, D: Diamond, C, Clover, S: Space
 PLAYING_CARD = [
     # ConsumptionCard: 63
@@ -61,11 +61,45 @@ PLAYING_CARD = [
     ['Dynamite', '2', 'H', 'E'],
 ]
 
+IMAGE_ROLE_PATH = '../UI/ImageAsset/roles/'
+IMAGE_PLAYINGCARD_PATH = '../UI/ImageAsset/cards/'
+
 IMAGES = {
-    'Sheriff': None, 'Deputy': None, 'Outlaw': None, 'Outlaw': None, 'Renegade': None,
+    # Roles
+    'Sheriff': IMAGE_ROLE_PATH + 'sheriff.png', 
+    'Deputy': IMAGE_ROLE_PATH + 'deputy.png', 
+    'Outlaw': IMAGE_ROLE_PATH + 'outlaw.png', 
+    'Renegade': IMAGE_ROLE_PATH + 'renegade.png',
 
-    'Bang!': None, 'Missed!': None, 'Beer': None, 'Duel': None, 'Indian!': None
+    # Characters
 
+    # Playing Cards
+    # Weapon
+    'appaloosa': IMAGE_PLAYINGCARD_PATH + 'appaloosa.png', 
+    'carabine': IMAGE_PLAYINGCARD_PATH + 'carabine.png',
+    'mustang.png' : IMAGE_PLAYINGCARD_PATH + 'mustang.png',
+    'remington.png' : IMAGE_PLAYINGCARD_PATH + 'remington.png',
+    'schofield.png' : IMAGE_PLAYINGCARD_PATH + 'schofield.png',
+    'volcanic.png' : IMAGE_PLAYINGCARD_PATH + 'volcanic.png',
+    'winchester.png' : IMAGE_PLAYINGCARD_PATH + 'winchester.png',
+
+    # Equipment
+    'Barrel': IMAGE_PLAYINGCARD_PATH + 'barrel.png', 
+    'Dynamite': IMAGE_PLAYINGCARD_PATH + 'dynamite.png', 
+    'Jail.png' : IMAGE_PLAYINGCARD_PATH + 'jail.png',
+
+    # Consumption
+    'bang': IMAGE_PLAYINGCARD_PATH + 'bang.png', 
+    'beer': IMAGE_PLAYINGCARD_PATH + 'beer.png', 
+    'carabine': IMAGE_PLAYINGCARD_PATH + 'carabine.png',
+    'diligenza.png' : IMAGE_PLAYINGCARD_PATH + 'diligenza.png',
+    'duel.png' : IMAGE_PLAYINGCARD_PATH + 'duel.png',
+    'gatling.png' : IMAGE_PLAYINGCARD_PATH + 'gatling.png',
+    'indians.png' : IMAGE_PLAYINGCARD_PATH + 'indians.png',
+    'missed.png' : IMAGE_PLAYINGCARD_PATH + 'missed.png',
+    'panico.png' : IMAGE_PLAYINGCARD_PATH + 'panico.png',
+    'saloon.png' : IMAGE_PLAYINGCARD_PATH + 'saloon.png',
+    'wellsfargo.png' : IMAGE_PLAYINGCARD_PATH + 'wellsfargo.png',
 
     #...
 }
