@@ -1,5 +1,5 @@
 from Rule import Setting
-from Player import Player
+from Rule import Player
 from Card import Card
 import random
 
@@ -23,13 +23,8 @@ class Board:
             init_role = Setting.NUMBER_OF_ROLE[self.number_of_players][player_number]
             init_bullets = 4 + (init_role == 'Sheriff')  # 보안관은 bullets + 1
 
-            self.players.append(Player(player_number, init_bullets, init_role, None, self.deck[-init_bullets:]))
+            self.players.append(Player.Player(player_number, init_bullets, init_role, None, self.deck[-init_bullets:]))
             del self.deck[-init_bullets:]
-
-
-
-
-
 
 
 
