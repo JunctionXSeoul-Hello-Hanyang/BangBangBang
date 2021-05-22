@@ -44,3 +44,17 @@ class DrawUi:
         for current in self.board.boardSection:
             self.draw_one(current.card,current.boardLocation)
         pygame.display.update()
+
+
+
+    def getClickInfo(self, pos):
+        for entity in self.board.boardSection:
+            b = entity.boardLocation
+            click_rect = pygame.Rect(b.centerX-(b.width)/2, b.centerY-(b.height)/2, b.width, b.height)
+
+            if click_rect.collidepoint(pos):
+                return entity
+                
+        return 0
+
+
