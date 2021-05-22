@@ -31,9 +31,6 @@ while 1:
 
             if a == 0:
                 continue
-
-            print(a.card.name)
-
             if a.card.name == "mustang":
                 print("MUSTANG!")
 
