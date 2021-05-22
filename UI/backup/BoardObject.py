@@ -86,3 +86,5 @@ class EnemyStatus:
         self.nameImage = font.render(str(self.name), True, (100, 100, 100))
         self.name_rect = self.nameImage.get_rect()
         self.name_rect.center = self.nameLocation
+
+
