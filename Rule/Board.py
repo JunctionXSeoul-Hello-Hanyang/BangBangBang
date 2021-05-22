@@ -1,4 +1,4 @@
-import Field
+from Rule import Field
 
 class Board:
     def __init__(self, number_of_players):
