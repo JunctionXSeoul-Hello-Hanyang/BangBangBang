@@ -33,17 +33,33 @@ class Board:
     # 현재 순서의 플레이어가 카드 한 장 뽑는 함수
     def drawCard(self):
         # deck에서 카드 한 개 뽑음
-        drawedCard = self.deck.pop();
+        drawedCard = self.deck.pop()
 
         # 현재 차례의 플레이어를 선택해 해당 플레이어의 덱에 추가해준다.
         curPlayer = self.players[self.whoseTurn]
-        curPlayer.cards.append(drawedCard);
+        curPlayer.cards.append(drawedCard)
 
         # deck 비어있는 경우, 버려진 덱을 섞어서 채워준다.
-        if self.deck:
+        if not self.deck:
             random.shuffle(self.trashCan)
             self.deck = self.trashCan
             self.trashCan = []
+
+
+    # 카드 사용 후에 버리는 함수
+    # 매개변수의 경우 현재플레이어 덱에서의 카드 idx를 받게 된다.
+    def handleAfterCardUsase(self, playerCardIdx):
+        curPlayer = self.players[self.whoseTurn]
+        trashCard = curPlayer.cards[playerCardIdx]
+
+        # 자신의 덱에서 카드 삭제
+        del curPlayer.cards[playerCardIdx]
+
+        # 쓰레기통에 해당 카드 삽입
+        self.trashCan.append(trashCard)
+
+
+
 
 
 
