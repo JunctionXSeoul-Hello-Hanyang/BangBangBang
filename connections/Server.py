@@ -36,6 +36,7 @@ def turnover():
         if player.field.bullets > 0:
             board.whoseTurn = nextTurn
             break
+        nextTurn += 1
     drawCard()
     drawCard()
 
