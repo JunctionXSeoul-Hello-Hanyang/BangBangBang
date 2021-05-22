@@ -59,8 +59,8 @@ def broadcast_board():
     for conn in playersSocket:
         conn.sendall(pickle.dumps(board))
 
-def threaded_client(conn):
-    # conn.send(str.encode("Connected"))
+def threaded_client(conn, currentPlayer):
+    conn.send(str.encode(str(currentPlayer)))
     
     reply = ""
     while True:
@@ -76,6 +76,8 @@ def threaded_client(conn):
             print("Received: ", reply)
             print("Sending : ", reply)
 
+            handle(reply)
+
             # 특정 함수 처리
 
             broadcast_board() # 변경 이후의 맵이 모든 클라이언트에 전달
@@ -87,20 +89,44 @@ def threaded_client(conn):
 
 
 def handle(reply):
-    reply.name = reply.split(' ')
+    splitedCmd = reply.split(' ')
 
-    if reply.name[0].equals("bang"):
-    elif reply.name[0].equals("missed"):
-    elif reply.name[0].equals("beer"):
-    elif reply.name[0].equals("duel"):
-    elif reply.name[0].equals("indian"):
-    elif reply.name[0].equals("gatling"):
-    elif reply.name[0].equals("saloon"):
-    elif reply.name[0].equals("panic"):
-    elif reply.name[0].equals("generalstore"):
-    elif reply.name[0].equals("stagecoach"):
-    elif reply.name[0].equals("wellsfargo"):
-    elif reply.name[0].equals("catbalu"):
+    if splitedCmd[0].equals("bang"):
+        actionBang(splitedCmd[1], splitedCmd[2], splitedCmd[3])
+    elif splitedCmd[0].equals("missed"):
+        actionMissed(splitedCmd[1], splitedCmd[2])
+    elif splitedCmd[0].equals("beer"):
+        actionBeer(splitedCmd[1], splitedCmd[2])
+    elif splitedCmd[0].equals("duel"):
+        actionDuel(splitedCmd[1], splitedCmd[2])
+    elif splitedCmd[0].equals("indian"):
+        actionIndian(splitedCmd[1], splitedCmd[2])
+    elif splitedCmd[0].equals("gatling"):
+        actionGatling(splitedCmd[1], splitedCmd[2])
+    elif splitedCmd[0].equals("saloon"):
+        actionSaloon(splitedCmd[1], splitedCmd[2])
+    elif splitedCmd[0].equals("panic"):
+        actionPanic(splitedCmd[1], splitedCmd[2], splitedCmd[3])
+    elif splitedCmd[0].equals("generalstore"):
+        actionGeneralStore(splitedCmd[1], splitedCmd[2])
+    elif splitedCmd[0].equals("stagecoach"):
+        actionStageCoach(splitedCmd[1], splitedCmd[2])
+    elif splitedCmd[0].equals("wellsfargo"):
+        actionWellsfargo(splitedCmd[1], splitedCmd[2])
+    elif splitedCmd[0].equals("catbalu"):
+        actionCatbalu(splitedCmd[1], splitedCmd[2], splitedCmd[3])
+
+def actionBang(fromIndex, toIndex, cardIndex):
+    board.handleAfterCardUsage(cardIndex)
+    board.whoseTurn=toIndex
+    board.phase="banged"
+
+    board.players[toIndex].field.bullets = board.players[toIndex].field.bullets-1
+    
+def actionBeer(fromIndex, cardIndex)
+    
+
+
 
 
 while True:
@@ -109,7 +135,7 @@ while True:
 
     print(currentPlayer, "players connected")
     currentPlayer += 1
-    playersSocket.append(conn);
+    playersSocket.append(conn, currentPlayer);
 
     if currentPlayer == 5:
         print("Game Starting....")

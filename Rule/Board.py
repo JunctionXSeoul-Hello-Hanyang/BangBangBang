@@ -13,6 +13,7 @@ class Board:
         self.trashCan = []
 
         self.whoseTurn = 0
+        self.phase = ""
 
 
         # shuffle deck
