@@ -61,7 +61,7 @@ class DrawUi:
         rect = image.get_rect()
         rect.center = (box.centerX,box.centerY)
         self.rects[box.sectionNumber] = rect
-                
+
         self.screen.blit(image, rect)
     
     def draw_total(self):
@@ -80,6 +80,8 @@ class DrawUi:
             
             self.draw_one(current.card,current.boardLocation,condition)
         pygame.display.update()
+        self.board = BoardSection.BoardSection([self.current_player] + self.other_player_list)
+
 
     def popUp(self, message="a"):
         Tk().wm_withdraw() #to hide the main window

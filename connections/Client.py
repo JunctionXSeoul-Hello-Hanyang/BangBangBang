@@ -124,6 +124,7 @@ def display_update(board, cards):
     # 자신의 패 update
     for i, card in enumerate(board.players[my_player_number].cards):
         idx = 28 + i
+        print(i)
         drawUI.update_card(idx, card)
     drawUI.draw_total()
 
@@ -155,6 +156,7 @@ if __name__ == "__main__":
     print(board.phase)
     drawUI = DrawUi.DrawUi(my_player_number, other_player)
     display_update(board, cards)
+    phase = board.phase
     card_use_button = drawUI.rects[38]
     turn_over_button = drawUI.rects[39]
 
@@ -167,11 +169,11 @@ if __name__ == "__main__":
             if board.whoseTurn == my_player_number:
 
                 # phase2 (use card)
-                if board.phase == '2':
+                if phase == '2':
                     if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                         # turn over button
                         if turn_over_button.collidepoint(event.pos):
-                            board.phase = '3'
+                            phase = '3'
                         # card use button
                         elif card_use_button.collidepoint(event.pos):
                             print('click')
@@ -186,7 +188,7 @@ if __name__ == "__main__":
                                 right_card_idx = showCardOnRight(board, i, cards)
 
                 # phase 3 (exceed card)
-                elif board.phase == '3':
+                elif phase == '3':
                     if len(board.players[my_player_number].cards) > board.players[my_player_number].field.bullets:
                         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                             for idx, card in enumerate(cards):
@@ -200,6 +202,7 @@ if __name__ == "__main__":
                     else:
                         board = network.send('turn over')  # turn over
                         display_update(board, cards)
+                        phase = board.phase
 
             elif event.type == pygame.QUIT:
                 run = False
