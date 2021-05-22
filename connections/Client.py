@@ -51,6 +51,16 @@ def select_target_player(board, card_idx, my_player_number):
 
 def select_target_card(board, idx, my_player_number):
     # 장착된 카드 선택 혹은 랜덤하게 상대 패 선택
+    player_idx = -1
+
+    while player_idx == -1:
+        for event in pygame.event.get():
+            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                for i, player in enumerate(players):
+                    if player.collidepoint(event.pos) and available_player(board, card_idx, my_player_number, i):
+                        player_idx = other_player[i]
+    return player_idx
+
     return 0
 
 def showCardOnRight(board, idx, cards):
@@ -104,7 +114,8 @@ def useCardOnRight(board, idx):
 def display_update(board, cards):
     cards.clear()
     # 상대방의 상태 update(Player 객체를 통해)
-
+    for other_person in other_player:
+        drawUI.update_player(board.players[other_person])
 
     # 자신의 패 update
     for i, card in enumerate(board.players[my_player_number].cards):
@@ -170,7 +181,7 @@ if __name__ == "__main__":
                             for idx, card in enumerate(cards):
                                 if card.collidepoint(event.pos):
                                     card_idx = board.players[my_player_number].cards[idx].idx
-                                    board = network.send('discard {} {}'.format(my_player_number, card_idx))
+                                    board = network.send('discard {}'.format(card_idx))
                     else:
                         board = network.send('turn over')  # turn over
 
