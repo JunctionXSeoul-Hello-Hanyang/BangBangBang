@@ -40,7 +40,7 @@ class DrawUi:
             self.update_card(self.board.UI_dict[index][0],0)
             self.update_card(self.board.UI_dict[index][1],Card(player.field.role,0,0,0,0))
             self.update_card(self.board.UI_dict[index][2],player.field.equipmentCards)
-            self.update_card(self.board.UI_dict[index][3],Card(str(len(player.field.cards)),0,0,0,0))
+            self.update_card(self.board.UI_dict[index][3],Card(str(len(player.cards)),0,0,0,0))
             self.update_card(self.board.UI_dict[index][4],player.field.gunCard)
             self.update_card(self.board.UI_dict[index][5],Card(str(player.field.bullets),0,0,0,0))
             
@@ -65,7 +65,7 @@ class DrawUi:
             if current.boardLocation.sectionNumber == 38:
                 current.card = Card("use",0,0,0,0)
             elif current.boardLocation.sectionNumber == 39:
-                current.card = Card("turnover",0,0,0,0)
+                current.card = Card("turn_over",0,0,0,0)
                 
             elif current.card == 0 or current.card == None:
                 current.card = Card("X",0,0,0,0)

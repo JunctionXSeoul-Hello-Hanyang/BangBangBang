@@ -8,8 +8,15 @@ sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 from Card import Card
 from Rule.Player import Player
 
+class Card:
+    def __init__(self, name, type, number, trump_symbol, idx):
+        self.name = name
+        self.number = number
+        self.trump_symbol = trump_symbol
+        self.type = type
+        self.idx = idx
 
-p1 = Player(0, 4,"outlaw" , "", 0)
+p1 = Player(4, 2,"outlaw" , "", [Card("",0,0,0,0),Card("",0,0,0,0),Card("",0,0,0,0)])
 
 ui = DrawUi(0,[1,2,3,4])
 
