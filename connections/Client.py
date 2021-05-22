@@ -115,17 +115,20 @@ def display_update(board, cards):
 
 
 
-board = Board.Board(5)
+#board = Board.Board(5)
+#board.phase = '2'
+
+board = 0
 if __name__ == "__main__":
     run = True
     #network = Network("18.191.254.252", 5555)
-    #network = Network("127.0.0.1", 5555)
-    #my_player_number = int(network.id)
-    my_player_number = 0
-    drawUI = DrawUi.DrawUi()
+    network = Network("127.0.0.1", 5555)
+    my_player_number = int(network.id)
     del other_player[my_player_number]
     clock = pygame.time.Clock()
-    board.phase = '2'
+
+    board = network.send('update')
+    drawUI = DrawUi.DrawUi()
     display_update(board, cards)
     card_use_button = drawUI.rects[38]
     turn_over_button = drawUI.rects[39]
@@ -150,11 +153,8 @@ if __name__ == "__main__":
                             if msg != -1: # 사용할수 있는 카드인 경우
                                 board = network.send(msg)
                         # select card
-                        print(cards)
                         for i, card in enumerate(cards):
-                            print('card', card)
                             if card.collidepoint(event.pos):
-                                print(i)
                                 right_card_idx = showCardOnRight(board, i, cards)
 
                 # phase 3 (exceed card)
