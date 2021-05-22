@@ -119,8 +119,20 @@ def actionBang(fromIndex, toIndex, cardIndex):
 
     board.players[toIndex].field.bullets = board.players[toIndex].field.bullets-1
     
-def actionBeer(fromIndex, cardIndex)
-    
+def actionBeer(fromIndex, cardIndex) :
+    board.handleAfterCardUsage(cardIndex)
+    board.players[fromIndex].bullets += 1
+
+def actionIndian(fromIndex, cardIndex) :
+    board.handleAfterCardUsage(cardIndex)
+    for p in board.players:
+        hasBang = False
+        for idx, card in enumerate(p.cards):
+            if card.name == 'bang':
+                board.trashCan.append(card) # 버려질 쓰레기통에 카드 삽입
+                del p.cards[idx] # 자신의 덱에서 카드 삭제
+                return
+        if not hasBang : p.field.bullets -= 1
 
 
 
