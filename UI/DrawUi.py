@@ -41,7 +41,7 @@ class DrawUi:
                 
                 
         else:
-            self.update_card(self.board.UI_dict[index][0],0)
+            self.update_card(self.board.UI_dict[index][0],Card(str(player.player_number),0,0,0,0))
             self.update_card(self.board.UI_dict[index][1],Card(player.field.role,0,0,0,0))
             self.update_card(self.board.UI_dict[index][2],player.field.equipmentCards)
             self.update_card(self.board.UI_dict[index][3],Card(str(len(player.cards)),0,0,0,0))
