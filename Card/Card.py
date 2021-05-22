@@ -1,5 +1,8 @@
+
 class Card:
-    def __init__(self, image, name, description):
-        self.image = image
+    def __init__(self, name, type, number, trump_symbol, idx):
         self.name = name
-        self.description = description
+        self.number = number
+        self.trump_symbol = trump_symbol
+        self.type = type
+        self.idx = idx
