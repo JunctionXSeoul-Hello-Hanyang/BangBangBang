@@ -160,6 +160,28 @@ def actionSaloon():
                 if field.bullets < 4:
                     field.bullets += 1
 
+# 특정 패를 내 패로 만듦
+def actionPanico(cardIndex):
+    curPlayer = board.players[board.whoseTurn]
+
+    isFind = False
+
+    for player in board.players:
+        for idx, card in enumerate(player.cards):
+            if card.idx == cardIndex:
+                curPlayer.cards.append(card) # 현재 플레이어에게 카드 넣어줌
+                del player.cards[idx] # 원래 갖고 있던 플레이어에게 카드 삭제
+                isFind = True
+
+            if isFind:
+                break
+        if isFind:
+            break
+                
+                
+
+
+
 
 
 
