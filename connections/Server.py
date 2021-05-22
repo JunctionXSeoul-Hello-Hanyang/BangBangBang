@@ -27,6 +27,13 @@ board = None
 
 # 차례를 넘길 시 시행하는 함수
 def turnover():
+    cards = board.players[board.whoseTurn].cards
+    while len(cards) > board.players[board.whoseTurn].field.bullets:
+        random.shuffle(cards)
+        cards.pop()
+
+
+
     nextTurn = board.whoseTurn + 1;
     for _ in range(4):
         if nextTurn == 5:
@@ -94,6 +101,7 @@ def threaded_client(conn, currentPlayer):
             #     handle(reply)
 
             print(reply)
+
             conn.send(pickle.dumps(board))
 
             # broadcast_board() # 변경 이후의 맵이 모든 클라이언트에 전달
