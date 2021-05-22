@@ -15,9 +15,9 @@ class EnemyStatus:
         self.gun = gun
         self.equipment = equipment
 
-        self.width = {196, 0}
-        self.height = {0, 303}
-        self.baseLocation = {41,33} + {playerOrder*196, 0}
+        self.width = [196, 0]
+        self.height = [0, 303]
+        self.baseLocation = [41,33] + [playerOrder*196, 0]
         
         self.roleLocation = self.baseLocation
         self.equipmentLocation = self.baseLocation + self.width / 2
