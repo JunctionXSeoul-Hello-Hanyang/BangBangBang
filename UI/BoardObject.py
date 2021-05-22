@@ -1,5 +1,5 @@
 import pygame
-import numpy
+import numpy as np
 from pygame.locals import *
 
 class EnemyStatus:
@@ -16,23 +16,15 @@ class EnemyStatus:
         self.gun = gun
         self.equipment = equipment
 
-        self.width = [196, 0]
-        self.height = [0, 303]
+        self.width = np.array([196, 0])
+        self.height = np.array([0, 303])
         
-        """
-        self.baseLocation = [41,33] + [playerOrder*196, 0]
+        self.baseLocation = np.array([41,33]) + np.array([playerOrder*196, 0])
         
         self.roleLocation = self.baseLocation
-        self.equipmentLocation = self.baseLocation + [196/2, 0]
-        self.gunLocation = self.baseLocation + [0, 303/2]
-        self.numOfCardsLocation = self.baseLocation + [196/2, 303/2]
-"""
-        self.baseLocation = [41,33]
-    
-        self.roleLocation = self.baseLocation
-        self.equipmentLocation = self.baseLocation
-        self.gunLocation = self.baseLocation
-        self.numOfCardsLocation = self.baseLocation
+        self.equipmentLocation = self.baseLocation + np.array([196/2, 0])
+        self.gunLocation = self.baseLocation + np.array([0, 303/2])
+        self.numOfCardsLocation = self.baseLocation + np.array([196/2, 303/2])
 
     def updateImage(self):
         #font = pygame.font.Font('LexiGulim.ttf', 30)
