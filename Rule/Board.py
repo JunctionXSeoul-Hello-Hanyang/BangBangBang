@@ -14,8 +14,8 @@ class Board:
 
         # shuffle deck
         random.shuffle(Setting.PLAYING_CARD)
-        for card in Setting.PLAYING_CARD:
-            self.deck.append(Card(card[0], card[1], card[2], card[3]))
+        for idx, card in enumerate(Setting.PLAYING_CARD):
+            self.deck.append(Card(card[0], card[1], card[2], card[3], idx))
 
         # init player, draw cards
         random.shuffle(Setting.NUMBER_OF_ROLE[self.number_of_players])
