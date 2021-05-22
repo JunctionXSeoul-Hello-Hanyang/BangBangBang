@@ -107,17 +107,17 @@ def threaded_client(conn, currentPlayer):
 def handle(reply):
     splitedCmd = reply.split(' ')
     
-    usedCardIdx = '채워야함'
+    usedCardIdx = splitedCmd[1]
 
     if splitedCmd[0] == 'bang':
-        enemyPlayerIdx = '채워야함'
+        enemyPlayerIdx = splitedCmd[2]
         actionBang(enemyPlayerIdx)
 
     elif splitedCmd[0] == 'beer':
         actionBeer()
 
     elif splitedCmd[0] == 'duel':
-        enemyPlayerIdx = '채워야함'
+        enemyPlayerIdx = splitedCmd[2]
         actionDuel(enemyPlayerIdx)
 
     elif splitedCmd[0] == 'indian':
@@ -130,11 +130,11 @@ def handle(reply):
         actionSaloon()
 
     elif splitedCmd[0] == 'panic':
-        cardIndex = '채워야함'
+        cardIndex = splitedCmd[2]
         actionPanic(cardIndex)
 
     elif splitedCmd[0] == 'catBalu':
-        cardIndex = '채워야함'
+        cardIndex = splitedCmd[2]
         actionCalbalou(cardIndex)
 
     elif splitedCmd[0] == 'generalStore':
