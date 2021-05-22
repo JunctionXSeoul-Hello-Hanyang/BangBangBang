@@ -1,22 +1,23 @@
+import os, sys
+sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
+
 import socket
 import pickle
 import random
 from _thread import *
+from Rule import Board
 
-import sys
 
 server = "0.0.0.0"
 port = 5555
-
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
 
 try:
     s.bind((server, port))
 except socket.error as e:
     str(e)
 
-s.listen(2)
+s.listen(5)
 print("Waiting for a connection, Server Started")
 
 playersSocket = []
@@ -136,25 +137,21 @@ def actionIndian(fromIndex, cardIndex) :
 
 
 
-def actionCatbalu(cardIdx):
-
-
-
 
 while True:
     conn, addr = s.accept()
     print("Connected to:", addr)
 
-    print(currentPlayer, "players connected")
     currentPlayer += 1
-    playersSocket.append(conn, currentPlayer);
+    print(currentPlayer, "players connected")
+    playersSocket.append(conn)
 
     if currentPlayer == 5:
         print("Game Starting....")
-        board = Board(5) # 게임판 생성
+        board = Board.Board(5) # 게임판 생성
         broadcast_board() # 게임판 시작 점 전부 뿌림
-        for conn in playersSocket:
-            start_new_thread(threaded_client, (conn, ))
+        for idx, conn in enumerate(playersSocket):
+            start_new_thread(threaded_client, (conn, idx))
 
 
 
