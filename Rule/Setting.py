@@ -29,7 +29,7 @@ PLAYING_CARD = [
     # duel: 3
     ['duel', 'Q', 'D', 'C'], ['duel', '8', 'C', 'C'], ['duel', 'J', 'H', 'C'],
     # indian!: 2
-    ['indian!', 'K', 'D', 'C'], ['indian!', 'A', 'D', 'C'],
+    ['indian', 'K', 'D', 'C'], ['indian', 'A', 'D', 'C'],
     # Gatling: 1
     ['gatling', '10', 'H', 'C'],
     # Saloon: 1
