@@ -34,11 +34,12 @@ class BoardUI:
         # BoardObject의 EnemyStatus Class에 저장된 이미지를 그려준다.
         print("print enemystatus")
         for temp in self.enemyStatusList:
-            self.screen.blit(temp.roleImage, temp.roleLocation)
-            self.screen.blit(temp.equipmentImage, temp.equipmentLocation)
-            self.screen.blit(temp.gunImage, temp.gunLocation)
-            self.screen.blit(temp.numOfCardsImage, temp.numOfCardsLocation)
-            self.screen.blit(temp.healthImage, temp.healthLocation)
+            self.screen.blit(temp.nameImage, temp.name_rect)
+            self.screen.blit(temp.roleImage, temp.role_rect)
+            self.screen.blit(temp.equipmentImage, temp.equipment_rect)
+            self.screen.blit(temp.gunImage, temp.gun_rect)
+            self.screen.blit(temp.numOfCardsImage, temp.numOfCards_rect)
+            self.screen.blit(temp.healthImage, temp.health_rect)
             
 
         pygame.display.update() 
@@ -63,3 +64,6 @@ class BoardUI:
         if i is "ERROR":
             print("no player name match")
             print("error occured at drawEnemyStatus")
+            return -1
+
+        return 0
