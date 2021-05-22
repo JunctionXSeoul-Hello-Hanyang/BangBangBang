@@ -3,7 +3,7 @@ from BoardSection import BoardSection,BoardEntity
 import os
 import time
 
-ui = DrawUi(0)
+ui = DrawUi(0,[1,2,3,4])
 
 path = "./ImageAsset/cards/"
 file_list = os.listdir(path) + os.listdir(path) + os.listdir(path)

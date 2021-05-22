@@ -10,9 +10,10 @@ from Card import Card
 
 
 class DrawUi:
-    def __init__(self,current_player,X=1280,Y=720):
+    def __init__(self,current_player,other_player_list,X=1280,Y=720):
         
         self.current_player = current_player
+        self.other_player_list = other_player_list
         
         self.cards_path = "./ImageAsset/cards/"
         self.screen = pygame.display.set_mode((X,Y), DOUBLEBUF)
