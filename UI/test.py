@@ -1,4 +1,4 @@
-from test import DrawUi
+from DrawUi import DrawUi
 from BoardSection import BoardSection,BoardEntity
 import os
 import time
