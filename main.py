@@ -1,5 +1,4 @@
 from Rule import *
 from Card import *
+import pygame
 
-
-a = Board(7)

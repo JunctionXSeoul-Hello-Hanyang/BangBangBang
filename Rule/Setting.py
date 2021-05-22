@@ -1,10 +1,10 @@
 # 플레이어의 수에 따른 직업의 수
 # 보안관, 부관, 무법자, 배신자
-NUMBER_OF_CHARACTER = {
-    4: {'Sheriff': 1, 'Deputy': 0, 'Outlaw': 2, 'Renegade': 1},
-    5: {'Sheriff': 1, 'Deputy': 1, 'Outlaw': 2, 'Renegade': 1},
-    6: {'Sheriff': 1, 'Deputy': 1, 'Outlaw': 3, 'Renegade': 1},
-    7: {'Sheriff': 1, 'Deputy': 2, 'Outlaw': 3, 'Renegade': 1},
+NUMBER_OF_ROLE = {
+    4: ['Sheriff', 'Outlaw', 'Outlaw', 'Renegade'],
+    5: ['Sheriff', 'Deputy', 'Outlaw', 'Outlaw', 'Renegade'],
+    6: ['Sheriff', 'Deputy', 'Outlaw', 'Outlaw', 'Outlaw', 'Renegade'],
+    7: ['Sheriff', 'Deputy', 'Deputy', 'Outlaw', 'Outlaw', 'Outlaw', 'Renegade'],
 }
 
 # PlayingCard: 80
@@ -12,52 +12,60 @@ NUMBER_OF_CHARACTER = {
 PLAYING_CARD = [
     # ConsumptionCard: 63
     # Bang!: 25
-    ['Bang!', 'Q', 'H'], ['Bang!', 'K', 'H'], ['Bang!', 'A', 'H'], ['Bang!', 'A', 'D'],
-    ['Bang!', 'D', 'C'], ['Bang!', 'D', 'C'], ['Bang!', '4', 'D'], ['Bang!', '5', 'D'],
-    ['Bang!', '6', 'D'], ['Bang!', '7', 'D'], ['Bang!', '8', 'D'], ['Bang!', '9', 'D'],
-    ['Bang!', '10', 'D'], ['Bang!', 'J', 'D'], ['Bang!', 'Q', 'D'], ['Bang!', 'K', 'D'],
-    ['Bang!', '2', 'C'], ['Bang!', '3', 'C'], ['Bang!', '4', 'C'], ['Bang!', '5', 'C'],
-    ['Bang!', '6', 'C'], ['Bang!', '7', 'C'], ['Bang!', '8', 'C'],['Bang!', '9', 'C'],
-    ['Bang!', 'A', 'S'],
+    ['Bang!', 'Q', 'H', 'C'], ['Bang!', 'K', 'H', 'C'], ['Bang!', 'A', 'H', 'C'], ['Bang!', 'A', 'D', 'C'],
+    ['Bang!', 'D', 'C', 'C'], ['Bang!', 'D', 'C', 'C'], ['Bang!', '4', 'D', 'C'], ['Bang!', '5', 'D', 'C'],
+    ['Bang!', '6', 'D', 'C'], ['Bang!', '7', 'D', 'C'], ['Bang!', '8', 'D', 'C'], ['Bang!', '9', 'D', 'C'],
+    ['Bang!', '10', 'D', 'C'], ['Bang!', 'J', 'D', 'C'], ['Bang!', 'Q', 'D', 'C'], ['Bang!', 'K', 'D', 'C'],
+    ['Bang!', '2', 'C', 'C'], ['Bang!', '3', 'C', 'C'], ['Bang!', '4', 'C', 'C'], ['Bang!', '5', 'C', 'C'],
+    ['Bang!', '6', 'C', 'C'], ['Bang!', '7', 'C', 'C'], ['Bang!', '8', 'C', 'C'],['Bang!', '9', 'C', 'C'],
+    ['Bang!', 'A', 'S', 'C'],
     # Missed!: 12
-    ['Missed!', '2', 'S'], ['Missed!', '3', 'S'], ['Missed!', '4', 'S'], ['Missed!', '5', 'S'],
-    ['Missed!', '6', 'S'], ['Missed!', '7', 'S'], ['Missed!', '8', 'S'], ['Missed!', '10', 'C'],
-    ['Missed!', 'J', 'C'], ['Missed!', 'K', 'C'], ['Missed!', 'A', 'C'], ['Missed!', 'Q', 'C'],
+    ['Missed!', '2', 'S', 'C'], ['Missed!', '3', 'S', 'C'], ['Missed!', '4', 'S', 'C'], ['Missed!', '5', 'S', 'C'],
+    ['Missed!', '6', 'S', 'C'], ['Missed!', '7', 'S', 'C'], ['Missed!', '8', 'S', 'C'], ['Missed!', '10', 'C', 'C'],
+    ['Missed!', 'J', 'C', 'C'], ['Missed!', 'K', 'C', 'C'], ['Missed!', 'A', 'C', 'C'], ['Missed!', 'Q', 'C', 'C'],
     # Beer: 6
-    ['Beer', '6', 'H'], ['Beer', '7', 'H'], ['Beer', '8', 'H'], ['Beer', '9', 'H'],
-    ['Beer', '10', 'H'], ['Beer', 'J', 'H'],
+    ['Beer', '6', 'H', 'C'], ['Beer', '7', 'H', 'C'], ['Beer', '8', 'H', 'C'], ['Beer', '9', 'H', 'C'],
+    ['Beer', '10', 'H', 'C'], ['Beer', 'J', 'H', 'C'],
     # Duel: 3
-    ['Duel', 'Q', 'D'], ['Duel', '8', 'C'], ['Duel', 'J', 'H'],
+    ['Duel', 'Q', 'D', 'C'], ['Duel', '8', 'C', 'C'], ['Duel', 'J', 'H', 'C'],
     # Indian!: 2
-    ['Indian!', 'K', 'D'], ['Indian!', 'A', 'D'],
+    ['Indian!', 'K', 'D', 'C'], ['Indian!', 'A', 'D', 'C'],
     # Gatling: 1
-    ['Gatling', '10', 'H'],
+    ['Gatling', '10', 'H', 'C'],
     # Saloon: 1
-    ['Saloon', '5', 'H'],
+    ['Saloon', '5', 'H', 'C'],
     # Panic!: 4
-    ['Panic!', '8', 'D'], ['Panic!', 'J', 'H'], ['Panic!', 'Q', 'H'], ['Panic!', 'A', 'H'],
+    ['Panic!', '8', 'D', 'C'], ['Panic!', 'J', 'H', 'C'], ['Panic!', 'Q', 'H', 'C'], ['Panic!', 'A', 'H', 'C'],
     # CatBalu: 4
-    ['CatBalu', '9', 'D'], ['CatBalu', '10', 'D'], ['CatBalu', 'J', 'D'], ['CatBalu', 'K', 'H'],
+    ['CatBalu', '9', 'D', 'C'], ['CatBalu', '10', 'D', 'C'], ['CatBalu', 'J', 'D', 'C'], ['CatBalu', 'K', 'H', 'C'],
     # GeneralStore: 2
-    ['GeneralStore', '9', 'C'], ['GeneralStore', 'Q', 'H'],
+    ['GeneralStore', '9', 'C', 'C'], ['GeneralStore', 'Q', 'H', 'C'],
     # Stagecoach: 2
-    ['Stagecoach', '9', 'S'], ['Stagecoach', '9', 'S'],
+    ['Stagecoach', '9', 'S', 'C'], ['Stagecoach', '9', 'S', 'C'],
     # WellsFargo: 1
-    ['WellsFargo', '3', 'H'],
+    ['WellsFargo', '3', 'H', 'C'],
 
     # ConsumptionCard: 17
     # Gun: 8
-    ['Schofield', 'J', 'C'], ['Schofield', 'Q', 'C'], ['Schofield', 'K', 'S'], ['Remington', 'A', 'C'],
-    ['Remington', '5', 'S'], ['Winchester', '8', 'S'], ['Volcanic', '10', 'C'], ['Volcanic', '10', 'S'],
+    ['Schofield', 'J', 'C', 'E'], ['Schofield', 'Q', 'C', 'E'], ['Schofield', 'K', 'S', 'E'], ['Remington', 'A', 'C', 'E'],
+    ['Remington', '5', 'S', 'E'], ['Winchester', '8', 'S', 'E'], ['Volcanic', '10', 'C', 'E'], ['Volcanic', '10', 'S', 'E'],
     # Jail: 3
-    ['Jail', '4', 'H'], ['Jail', '10', 'S'], ['Jail', 'J', 'S'],
+    ['Jail', '4', 'H', 'E'], ['Jail', '10', 'S', 'E'], ['Jail', 'J', 'S', 'E'],
     # Barrel: 2
-    ['Barrel', 'Q', 'S'], ['Barrel', 'K', 'S'],
+    ['Barrel', 'Q', 'S', 'E'], ['Barrel', 'K', 'S', 'E'],
     # Mustang: 2
-    ['Mustang', '8', 'H'], ['Mustang', '9', 'H'],
+    ['Mustang', '8', 'H', 'E'], ['Mustang', '9', 'H', 'E'],
     # Scope: 1
-    ['WellsFargo', 'A', 'S'],
+    ['WellsFargo', 'A', 'S', 'E'],
     # Dynamite: 1
-    ['Dynamite', '2', 'H'],
+    ['Dynamite', '2', 'H', 'E'],
 ]
 
+IMAGES = {
+    'Sheriff': None, 'Deputy': None, 'Outlaw': None, 'Outlaw': None, 'Renegade': None,
+
+    'Bang!': None, 'Missed!': None, 'Beer': None, 'Duel': None, 'Indian!': None
+
+
+    #...
+}
