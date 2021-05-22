@@ -8,14 +8,15 @@ class Board:
         self.number_of_players = number_of_players
         self.number_of_playingCards = 80
 
-
         self.deck = []
+        self.players = []
+        self.trashCan = []
+
         # shuffle deck
         random.shuffle(Setting.PLAYING_CARD)
         for card in Setting.PLAYING_CARD:
             self.deck.append(Card(card[0], card[1], card[2], card[3]))
 
-        self.players = []
         # init player, draw cards
         random.shuffle(Setting.NUMBER_OF_ROLE[self.number_of_players])
         for player_number in range(self.number_of_players):
@@ -24,7 +25,6 @@ class Board:
 
             self.players.append(Player(player_number, init_bullets, init_role, None, self.deck[-init_bullets:]))
             del self.deck[-init_bullets:]
-        self.trashCan = []
 
 
 
