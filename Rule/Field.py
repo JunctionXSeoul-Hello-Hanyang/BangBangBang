@@ -7,7 +7,7 @@ class Field:
         self.bullets = bullets
         self.role = role
         self.character = character
-        self.gunCard = Card('Colt.45', 'EG', None, None)
+        self.gunCard = Card('Colt.45', 'EG', None, None, None)
         self.equipmentCards = None
 
 
