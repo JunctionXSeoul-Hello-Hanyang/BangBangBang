@@ -74,9 +74,12 @@ class BoardEntity:
         self.palyer = player
 
 class BoardSection:
-    def __init__(self):
+    def __init__(self,player_list):
         self.boardSection = []
-
+        self.player_list = player_list
+        
+        self.player_to_index = {p:i for i,p in enumerate(player_list)}
+        
         for index, temp in enumerate(BOARD_LIST):
             boardLocation = BoardLocation(index, temp[0], temp[1], temp[2], temp[3])
             boardEntity = BoardEntity(boardLocation, 0, 0)
