@@ -24,6 +24,21 @@ playersSocket = []
 currentPlayer = 0
 board = None
 
+
+# 차례를 넘길 시 시행하는 함수
+def turnover():
+    nextTurn = board.whoseTurn + 1;
+    for _ in range(4):
+        if nextTurn == 5:
+            nextTurn = 0
+
+        player = board.players[nextTurn]
+        if player.field.bullets > 0:
+            board.whoseTurn = nextTurn
+            break
+    drawCard()
+    drawCard()
+
 # 현재 순서의 플레이어가 카드 한 장 뽑는 함수
 def drawCard():
     # deck에서 카드 한 개 뽑음
@@ -66,6 +81,14 @@ def threaded_client(conn, currentPlayer):
         try:
             data = conn.recv(4096)
             reply = data.decode("utf-8")
+
+            if reply == 'update' :
+                print(reply)
+                conn.send(pickle.dumps(board))
+
+            elif reply == 'turnover':
+                turnover()
+                
 
             if not data:
                 print("Disconnected")
@@ -310,34 +333,6 @@ def actionCalbalou(cardIndex):
 
 
 
-
-        
-    
-            
-    
-
-
-
-
-
-
-
-
-                
-                
-
-
-
-
-
-
-
-
-
-
-
-
-
 while True:
     conn, addr = s.accept()
     print("Connected to:", addr)
@@ -349,7 +344,9 @@ while True:
     if currentPlayer == 5:
         print("Game Starting....")
         board = Board.Board(5) # 게임판 생성
-        broadcast_board() # 게임판 시작 점 전부 뿌림
+        drawCard()
+        drawCard()
+        #broadcast_board() # 게임판 시작 점 전부 뿌림
 
         for idx, conn in enumerate(playersSocket):
             start_new_thread(threaded_client, (conn, idx))
