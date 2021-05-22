@@ -80,26 +80,21 @@ def threaded_client(conn, currentPlayer):
         # 여기선 서버의 경우 정보를 받는 경우에만 동작하게 된다. (턴제로)
         try:
             data = conn.recv(4096)
-            reply = data.decode("utf-8")
-
-            if reply == 'update' :
-                print(reply)
-                conn.send(pickle.dumps(board))
-
-            elif reply == 'turnover':
-                turnover()
-                
 
             if not data:
                 print("Disconnected")
                 break
+            reply = data.decode("utf-8")
 
-            print("Received: ", reply)
-            print("Sending : ", reply)
+            if reply == 'update':
+                None
+            elif reply == 'turnover':
+                turnover()
+            # else:
+            #     handle(reply)
 
-            # handle(reply)
-
-            # 특정 함수 처리
+            print(reply)
+            conn.send(pickle.dumps(board))
 
             # broadcast_board() # 변경 이후의 맵이 모든 클라이언트에 전달
         except:
