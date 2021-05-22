@@ -1,25 +1,30 @@
-from pygame.locals import *
-import pygame
+from test import DrawUi
+from BoardSection import BoardSection,BoardEntity
 import os
 import time
-class DrawUi:
-    def __init__(self,X=1280,Y=720,):
-        self.cards_path = "./ImageAsset/cards/"
-        self.screen = pygame.display.set_mode((X,Y), DOUBLEBUF)
-        pygame.display.set_caption('Bang Board')
-        self.BoardBaseImage = pygame.image.load("./ImageAsset/BoardBase.png").convert_alpha()
-        
-    def draw_one(self,card,box):
-        print(self.cards_path + card.name + '.png')
-        image = pygame.image.load(self.cards_path + card.name + '.png')
-        image = pygame.transform.scale(image, (box.width, box.height))
-        rect = image.get_rect()
-        rect.center = (box.centerX,box.centerY)
-        self.screen.blit(image, rect)
-        
-    def update(self,update_list):
-        self.screen.fill((255,255,255))
-        self.screen.blit(self.BoardBaseImage, (0, 0))
-        for current in update_list:
-            self.draw_one(current[0],current[1])
-        pygame.display.update()
+
+ui = DrawUi()
+b_list   = BoardSection().boardSection
+
+print(b_list)
+
+path = "./ImageAsset/cards/"
+file_list = os.listdir(path) + os.listdir(path) + os.listdir(path)
+
+class Card:
+    def __init__(self, name, type, number, trump_symbol, idx):
+        self.name = name
+        self.number = number
+        self.trump_symbol = trump_symbol
+        self.type = type
+        self.idx = idx
+    
+
+
+
+
+input_list = [[Card(file_list[i].replace(".png",""),0,0,0,0),b_list[i].boardLocation] for i in range(40)]
+
+ui.update(input_list)
+
+time.sleep(5000)
