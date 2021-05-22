@@ -12,6 +12,9 @@ class Board:
         self.players = []
         self.trashCan = []
 
+        self.whoseTurn = 0
+
+
         # shuffle deck
         random.shuffle(Setting.PLAYING_CARD)
         for card in Setting.PLAYING_CARD:
@@ -25,6 +28,23 @@ class Board:
 
             self.players.append(Player.Player(player_number, init_bullets, init_role, None, self.deck[-init_bullets:]))
             del self.deck[-init_bullets:]
+
+
+    # 현재 순서의 플레이어가 카드 한 장 뽑는 함수
+    def drawCard(self):
+        # deck에서 카드 한 개 뽑음
+        drawedCard = self.deck.pop();
+
+        # 현재 차례의 플레이어를 선택해 해당 플레이어의 덱에 추가해준다.
+        curPlayer = self.players[self.whoseTurn]
+        curPlayer.cards.append(drawedCard);
+
+        # deck 비어있는 경우, 버려진 덱을 섞어서 채워준다.
+        if self.deck:
+            random.shuffle(self.trashCan)
+            self.deck = self.trashCan
+            self.trashCan = []
+
 
 
 
