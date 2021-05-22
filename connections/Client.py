@@ -199,6 +199,7 @@ if __name__ == "__main__":
 
                     else:
                         board = network.send('turn over')  # turn over
+                        display_update(board, cards)
 
             elif event.type == pygame.QUIT:
                 run = False

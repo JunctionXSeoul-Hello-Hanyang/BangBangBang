@@ -2,9 +2,12 @@ from pygame.locals import *
 import pygame
 import os,sys
 import time
-from UI import BoardSection
+from Rule import BoardSection
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 from Card import Card
+
+from tkinter import *
+from tkinter import messagebox
 
 class DrawUi:
 
@@ -18,11 +21,9 @@ class DrawUi:
         pygame.display.set_caption('Bang Board')
         self.BoardBaseImage = pygame.image.load("../UI/ImageAsset/BoardBase.png").convert_alpha()
         
-        self.board = BoardSection.BoardSection([current_player] + other_player_list)
+        self.board = BoardSection([current_player] + other_player_list)
         
         self.rects = {i:None for i in range(40)}
-        
-     
         
         
     def update_card(self,index,card):
@@ -60,7 +61,9 @@ class DrawUi:
         rect = image.get_rect()
         rect.center = (box.centerX,box.centerY)
         self.rects[box.sectionNumber] = rect
-
+        
+        print(rect)       
+        
         self.screen.blit(image, rect)
     
     def draw_total(self):
@@ -79,3 +82,7 @@ class DrawUi:
             
             self.draw_one(current.card,current.boardLocation,condition)
         pygame.display.update()
+
+    def popUp(self, message="a"):
+        Tk().wm_withdraw() #to hide the main window
+        messagebox.showinfo('Continue',message)
