@@ -1,15 +1,11 @@
 from pygame.locals import *
 import pygame
-import os,sys
+import os
 import time
-from BoardSection import BoardSection
-
-sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
-from Card import Card
-
-
+from UI import BoardSection
 
 class DrawUi:
+
     def __init__(self,current_player,other_player_list,X=1280,Y=720):
         
         self.current_player = current_player
@@ -29,6 +25,7 @@ class DrawUi:
         
     def update_card(self,index,card):
         self.board.boardSection[index].card = card
+
         
     def update_player(self,player):
         index = self.board.player_dict[player.player_number]
@@ -71,7 +68,6 @@ class DrawUi:
         
         
         self.screen.blit(image, rect)
-        return
     
     def draw_total(self):
         self.screen.fill((255,255,255))

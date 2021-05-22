@@ -7,7 +7,6 @@ class Network:
         self.server = serverIp
         self.port = serverPort
         self.addr = (self.server, self.port)
-        self.board = None
         self.id = self.connect()
 
         print(self.id)
@@ -15,7 +14,6 @@ class Network:
     def connect(self):
         try:
             self.client.connect(self.addr)
-            self.board = pickle.loads(self.client.recv(4096))
             return self.client.recv(2048).decode()
         except Exception as e:
             print(e)
