@@ -1,4 +1,6 @@
-from . import EquipmentCard
+import sys, os
+sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
+from Card import Card
 
 
 class CharacterCard(EquipmentCard):
