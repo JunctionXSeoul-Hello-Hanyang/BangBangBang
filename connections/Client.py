@@ -115,25 +115,32 @@ def display_update(board, cards):
 
 
 
-board = Board.Board(5)
+#board = Board.Board(5)
+#board.phase = '2'
+
+board = 0
 if __name__ == "__main__":
     run = True
     #network = Network("18.191.254.252", 5555)
-    #network = Network("127.0.0.1", 5555)
-    #my_player_number = int(network.id)
-    my_player_number = 0
-    drawUI = DrawUi.DrawUi()
+    network = Network("127.0.0.1", 5555)
+    my_player_number = int(network.id)
     del other_player[my_player_number]
     clock = pygame.time.Clock()
-    board.phase = '2'
+
+    print('a')
+    board = network.send('update')
+    print('a')
+    drawUI = DrawUi.DrawUi()
+    print('a')
     display_update(board, cards)
+    print('a')
     card_use_button = drawUI.rects[38]
     turn_over_button = drawUI.rects[39]
 
 
     while run:
         clock.tick(60)
-        #board = network.send('update')
+        board = network.send('update')
 
         for event in pygame.event.get():
             if board.whoseTurn == my_player_number:
