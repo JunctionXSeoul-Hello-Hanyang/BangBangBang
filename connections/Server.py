@@ -66,6 +66,7 @@ def drawCard():
 # 매개변수의 경우 카드의 유니크 idx를 받는다.
 def handleAfterCardUsase(cardIdx):
     curPlayer = board.players[board.whoseTurn]
+
     for idx, card in enumerate(curPlayer.cards):
         if card.idx == cardIdx:
             board.trashCan.append(card) # 버려질 쓰레기통에 카드 삽입
@@ -115,7 +116,7 @@ def threaded_client(conn, currentPlayer):
 def handle(reply):
     splitedCmd = reply.split(' ')
     
-    usedCardIdx = splitedCmd[1]
+    usedCardIdx = int(splitedCmd[1])
 
     if splitedCmd[0] == 'bang':
         enemyPlayerIdx = splitedCmd[2]
