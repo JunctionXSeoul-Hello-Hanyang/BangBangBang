@@ -3,7 +3,7 @@ import time
 
 if __name__ == "__main__":
     myName = "me"
-    playerName = {"1", "2", "3", "4"}
+    playerName = {"1", "2d", "3dd", "4vv"}
     # 기본 보드 생성
     # 시작시 무조건 생성해주어야함
     # myName에는 내 이름을, playerName에는 나머지 플레이어의 이름을 넣어주어야 한다.
@@ -16,11 +16,11 @@ if __name__ == "__main__":
     b.drawEnemyStatus("me", 1, 2, role="deputy", gun="appaloosa", equipment="barrel")
 
     b.drawEnemyStatus("1", 1, 2, role="outlaw", gun="appaloosa", equipment="barrel")
-    b.drawEnemyStatus("2", 1, 2, role="outlaw",  gun="appaloosa")
+    b.drawEnemyStatus("2d", 1, 2, role="outlaw",  gun="appaloosa")
     
     # role, gun, equipment는 기본 상태가 존재함. 인자로 넣어주지 않을 경우 기본 상태로 지정됨(기본 상태는 X 그림 또는 카드 뒷면)
-    b.drawEnemyStatus("3", 1, 2)
-    b.drawEnemyStatus("4", 1, 2)
+    b.drawEnemyStatus("3dd", 1, 2)
+    b.drawEnemyStatus("4vv", 1, 2)
 
     # 업데이트를 해준다음에는 반드시 drawBoard를 실행해주어야 새롭게 그림
     b.drawBoard()
@@ -31,4 +31,4 @@ if __name__ == "__main__":
     b.drawEnemyStatus("1", 1, 2)
     b.drawBoard()
 
-    time.sleep(100)
+    b.getMouseAction()
