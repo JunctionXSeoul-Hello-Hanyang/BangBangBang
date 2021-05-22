@@ -20,19 +20,35 @@ class DrawUi:
         pygame.display.set_caption('Bang Board')
         self.BoardBaseImage = pygame.image.load("./ImageAsset/BoardBase.png").convert_alpha()
         
-        self.board = BoardSection()
+        self.board = BoardSection([current_player] + other_player_list)
+        
         
         
     def update_card(self,index,card):
         self.board.boardSection[index].card = card
         
     def update_player(self,player):
-        return
+        index = self.board.player_dict[player.player_number]
+        if index == 0:
+            
+            self.update_card(self.UI_dict[index][0],Card(player.field.role,0,0,0,0)) # not yet
+            self.update_card(self.UI_dict[index][1],player.equipmentCards)
+            self.update_card(self.UI_dict[index][2],player.gunCard)
+            self.update_card(self.UI_dict[index][3],Card(str(player.field.bullets),0,0,0,0))
+                
+        else:
+            self.update_card(self.UI_dict[index][0],0)
+            self.update_card(self.UI_dict[index][1],Card(player.field.role,0,0,0,0))
+            self.update_card(self.UI_dict[index][2],player.equipmentCards)
+            self.update_card(self.UI_dict[index][3],Card(str(len(player.field.cards)),0,0,0,0))
+            self.update_card(self.UI_dict[index][4],player.gunCard)
+            self.update_card(self.UI_dict[index][5],Card(str(player.field.bullets),0,0,0,0))
+            
         
     def draw_one(self,card,box,condition = -1):
         if condition == -1:
             image = pygame.image.load(self.cards_path + card.name + '.png')                
-           
+         
         image = pygame.transform.scale(image, (box.width, box.height))
         rect = image.get_rect()
         rect.center = (box.centerX,box.centerY)
