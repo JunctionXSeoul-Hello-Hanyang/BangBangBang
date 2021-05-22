@@ -54,6 +54,7 @@ def handleAfterCardUsase(cardIdx):
 
 def broadcast_board():
     for conn in playersSocket:
+        print(conn)
         conn.sendall(pickle.dumps(board))
 
 def threaded_client(conn, currentPlayer):
@@ -63,21 +64,21 @@ def threaded_client(conn, currentPlayer):
     while True:
         # 여기선 서버의 경우 정보를 받는 경우에만 동작하게 된다. (턴제로)
         try:
-            data = conn.recv(2048)
+            data = conn.recv(4096)
             reply = data.decode("utf-8")
 
             if not data:
                 print("Disconnected")
                 break
-            
+
             print("Received: ", reply)
             print("Sending : ", reply)
 
-            handle(reply)
+            # handle(reply)
 
             # 특정 함수 처리
 
-            broadcast_board() # 변경 이후의 맵이 모든 클라이언트에 전달
+            # broadcast_board() # 변경 이후의 맵이 모든 클라이언트에 전달
         except:
             break
 
@@ -150,6 +151,7 @@ while True:
         print("Game Starting....")
         board = Board.Board(5) # 게임판 생성
         broadcast_board() # 게임판 시작 점 전부 뿌림
+
         for idx, conn in enumerate(playersSocket):
             start_new_thread(threaded_client, (conn, idx))
 
