@@ -128,6 +128,7 @@ if __name__ == "__main__":
     clock = pygame.time.Clock()
 
     board = network.send('update')
+    print(board.phase)
     drawUI = DrawUi.DrawUi()
     display_update(board, cards)
     card_use_button = drawUI.rects[38]
@@ -149,9 +150,12 @@ if __name__ == "__main__":
                             board.phase = '3'
                         # card use button
                         elif card_use_button.collidepoint(event.pos):
+                            print('click')
                             msg = useCardOnRight(board, right_card_idx)
                             if msg != -1: # 사용할수 있는 카드인 경우
                                 board = network.send(msg)
+                                display_update(board, cards)
+
                         # select card
                         for i, card in enumerate(cards):
                             if card.collidepoint(event.pos):
