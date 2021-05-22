@@ -9,7 +9,7 @@ NUMBER_OF_CHARACTER = {
 
 # PlayingCard: 80
 # H: Heart, D: Diamond, C, Clover, S: Space
-PLAYING_CARD = {
+PLAYING_CARD = [
     # ConsumptionCard: 63
     # Bang!: 25
     ['Bang!', 'Q', 'H'], ['Bang!', 'K', 'H'], ['Bang!', 'A', 'H'], ['Bang!', 'A', 'D'],
@@ -59,6 +59,5 @@ PLAYING_CARD = {
     ['WellsFargo', 'A', 'S'],
     # Dynamite: 1
     ['Dynamite', '2', 'H'],
-}
-
+]
 

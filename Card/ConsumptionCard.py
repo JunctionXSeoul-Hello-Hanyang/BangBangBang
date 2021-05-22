@@ -1,4 +1,4 @@
-from Card import PlayingCard
+from .PlayingCard import PlayingCard
 
 
 class EquipmentCard(PlayingCard):

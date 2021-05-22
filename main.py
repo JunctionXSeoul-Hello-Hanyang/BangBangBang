@@ -1,4 +1,4 @@
-from Rule import Board
+from Rule import *
 from Card import *
 
 
