@@ -59,7 +59,7 @@ def broadcast_board():
 
 def threaded_client(conn, currentPlayer):
     conn.send(str.encode(str(currentPlayer)))
-    
+
     reply = ""
     while True:
         # 여기선 서버의 경우 정보를 받는 경우에만 동작하게 된다. (턴제로)
@@ -135,6 +135,38 @@ def actionIndian(fromIndex, cardIndex) :
                 del p.cards[idx] # 자신의 덱에서 카드 삭제
                 return
         if not hasBang : p.field.bullets -= 1
+
+# 카드 두 장 가져오는 함수
+def actionDiligenza():
+    drawCard()
+    drawCard()
+
+# 카드 세 장 가져오는 함수
+def actionWellsPargo():
+    drawCard()
+    drawCard()
+    drawCard()
+
+# 죽지 않은 모든 플레이어 생명력 1 상승
+def actionSaloon():
+    for player in board.players:
+        # 보안관은 5, 나머지는 4가 최대
+        field = player.field
+        if field.bullets > 0 :
+            if field.role == 'Sheriff':
+                if field.bullets < 5:
+                    field.bullets += 1
+            else:
+                if field.bullets < 4:
+                    field.bullets += 1
+
+
+
+
+
+
+
+
 
 
 
