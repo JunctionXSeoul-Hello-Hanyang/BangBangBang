@@ -27,13 +27,6 @@ board = None
 
 # 차례를 넘길 시 시행하는 함수
 def turnover():
-    cards = board.players[board.whoseTurn].cards
-    while len(cards) > board.players[board.whoseTurn].field.bullets:
-        random.shuffle(cards)
-        cards.pop()
-
-
-
     nextTurn = board.whoseTurn + 1;
     for _ in range(4):
         if nextTurn == 5:
@@ -66,6 +59,7 @@ def drawCard():
 # 매개변수의 경우 카드의 유니크 idx를 받는다.
 def handleAfterCardUsase(cardIdx):
     curPlayer = board.players[board.whoseTurn]
+
     for idx, card in enumerate(curPlayer.cards):
         if card.idx == cardIdx:
             board.trashCan.append(card) # 버려질 쓰레기통에 카드 삽입
@@ -115,7 +109,7 @@ def threaded_client(conn, currentPlayer):
 def handle(reply):
     splitedCmd = reply.split(' ')
     
-    usedCardIdx = splitedCmd[1]
+    usedCardIdx = int(splitedCmd[1])
 
     if splitedCmd[0] == 'bang':
         enemyPlayerIdx = splitedCmd[2]
