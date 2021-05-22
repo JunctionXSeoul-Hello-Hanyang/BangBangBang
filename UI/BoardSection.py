@@ -76,7 +76,7 @@ class BoardEntity:
 class BoardSection:
     def __init__(self):
         self.boardSection = []
-
+        
         for index, temp in enumerate(BOARD_LIST):
             boardLocation = BoardLocation(index, temp[0], temp[1], temp[2], temp[3])
             boardEntity = BoardEntity(boardLocation, 0, 0)
