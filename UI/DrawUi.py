@@ -6,6 +6,9 @@ from UI import BoardSection
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 from Card import Card
 
+from tkinter import *
+from tkinter import messagebox
+
 class DrawUi:
 
     def __init__(self,current_player,other_player_list,X=1280,Y=720):
@@ -21,8 +24,6 @@ class DrawUi:
         self.board = BoardSection.BoardSection([current_player] + other_player_list)
         
         self.rects = {i:None for i in range(40)}
-        
-     
         
         
     def update_card(self,index,card):
@@ -60,7 +61,7 @@ class DrawUi:
         rect = image.get_rect()
         rect.center = (box.centerX,box.centerY)
         self.rects[box.sectionNumber] = rect
-
+                
         self.screen.blit(image, rect)
     
     def draw_total(self):
@@ -79,3 +80,7 @@ class DrawUi:
             
             self.draw_one(current.card,current.boardLocation,condition)
         pygame.display.update()
+
+    def popUp(self, message="a"):
+        Tk().wm_withdraw() #to hide the main window
+        messagebox.showinfo('Continue',message)
