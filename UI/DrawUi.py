@@ -22,8 +22,6 @@ class DrawUi:
         
         self.rects = {i:None for i in range(40)}
         
-     
-        
         
     def update_card(self,index,card):
         self.board.boardSection[index].card = card
