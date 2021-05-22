@@ -1,4 +1,4 @@
-from .Card import Card
+from Card import Card
 
 class CharacterCard(Card):
     def __init__(self, image, name, description):

@@ -7,7 +7,7 @@ NUMBER_OF_ROLE = {
     7: ['Sheriff', 'Deputy', 'Deputy', 'Outlaw', 'Outlaw', 'Outlaw', 'Renegade'],
 }
 
-# PlayingCard: 80
+# ConsumptionCard: 80
 # H: Heart, D: Diamond, C, Clover, S: Space
 PLAYING_CARD = [
     # ConsumptionCard: 63
