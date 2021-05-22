@@ -47,8 +47,8 @@ PLAYING_CARD = [
 
     # ConsumptionCard: 17
     # Gun: 8
-    ['Schofield', 'J', 'C', 'E'], ['Schofield', 'Q', 'C', 'E'], ['Schofield', 'K', 'S', 'E'], ['Remington', 'A', 'C', 'E'],
-    ['Remington', '5', 'S', 'E'], ['Winchester', '8', 'S', 'E'], ['Volcanic', '10', 'C', 'E'], ['Volcanic', '10', 'S', 'E'],
+    ['Schofield', 'J', 'C', 'EG'], ['Schofield', 'Q', 'C', 'EG'], ['Schofield', 'K', 'S', 'EG'], ['Remington', 'A', 'C', 'EG'],
+    ['Remington', '5', 'S', 'EG'], ['Winchester', '8', 'S', 'EG'], ['Volcanic', '10', 'C', 'EG'], ['Volcanic', '10', 'S', 'EG'],
     # Jail: 3
     ['Jail', '4', 'H', 'E'], ['Jail', '10', 'S', 'E'], ['Jail', 'J', 'S', 'E'],
     # Barrel: 2

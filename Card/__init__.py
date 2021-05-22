@@ -1,5 +1,1 @@
-from Card.Characters.CharacterCard import *
-from .EquipmentCard import *
-from .RoleCard import *
-from .ConsumptionCard import  *
-from .PlayingCard import  *
+from .Card import *
