@@ -21,7 +21,7 @@ class DrawUi:
         pygame.display.set_caption('Bang Board')
         self.BoardBaseImage = pygame.image.load("../UI/ImageAsset/BoardBase.png").convert_alpha()
         
-        self.board = BoardSection([current_player] + other_player_list)
+        self.board = BoardSection.BoardSection([current_player] + other_player_list)
         
         self.rects = {i:None for i in range(40)}
         
