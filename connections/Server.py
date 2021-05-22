@@ -97,8 +97,8 @@ def threaded_client(conn, currentPlayer):
                 None
             elif reply == 'turn over':
                 turnover()
-            # else:
-            #     handle(reply)
+            else:
+                handle(reply)
 
             print(reply)
 
