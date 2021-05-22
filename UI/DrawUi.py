@@ -2,7 +2,7 @@ from pygame.locals import *
 import pygame
 import os,sys
 import time
-from Rule import BoardSection
+from UI import BoardSection
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 from Card import Card
 
