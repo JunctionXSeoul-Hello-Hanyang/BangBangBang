@@ -2,7 +2,7 @@ from pygame.locals import *
 import pygame
 import os,sys
 import time
-from BoardSection import BoardSection
+from UI import BoardSection
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 from Card import Card
 
@@ -16,12 +16,12 @@ class DrawUi:
         self.current_player = current_player
         self.other_player_list = other_player_list
         
-        self.cards_path = "./ImageAsset/cards/"
+        self.cards_path = "../UI/ImageAsset/cards/"
         self.screen = pygame.display.set_mode((X,Y), DOUBLEBUF)
         pygame.display.set_caption('Bang Board')
-        self.BoardBaseImage = pygame.image.load("./ImageAsset/BoardBase.png").convert_alpha()
+        self.BoardBaseImage = pygame.image.load("../UI/ImageAsset/BoardBase.png").convert_alpha()
         
-        self.board = BoardSection([current_player] + other_player_list)
+        self.board = BoardSection.BoardSection([current_player] + other_player_list)
         
         self.rects = {i:None for i in range(40)}
         
@@ -61,14 +61,6 @@ class DrawUi:
         rect = image.get_rect()
         rect.center = (box.centerX,box.centerY)
         self.rects[box.sectionNumber] = rect
-        
-        
-        
-        print(rect)   
-        
-        
-        
-        
         self.screen.blit(image, rect)
     
     def draw_total(self):
@@ -87,6 +79,9 @@ class DrawUi:
             
             self.draw_one(current.card,current.boardLocation,condition)
         pygame.display.update()
+        self.board = BoardSection.BoardSection([self.current_player] + self.other_player_list)
+
+
 
     def popUp(self, message="a"):
         Tk().wm_withdraw() #to hide the main window
