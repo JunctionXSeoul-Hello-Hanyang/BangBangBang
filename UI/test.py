@@ -1,52 +1,62 @@
-from DrawUi import DrawUi
-from BoardSection import BoardSection,BoardEntity
-import os
-import sys
-import time
-
-sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
-from Card import Card
-from Rule.Player import Player
-
-class Card:
-    def __init__(self, name, type, number, trump_symbol, idx):
-        self.name = name
-        self.number = number
-        self.trump_symbol = trump_symbol
-        self.type = type
-        self.idx = idx
-
-p0 = Player(0, 2,"outlaw" , "", [Card("back-playing",0,0,0,0),Card("bang",0,0,0,0),Card("barrel",0,0,0,0)])
-p1 = Player(1, 2,"deputy" , "", [Card("back-playing",0,0,0,0),Card("bang",0,0,0,0),Card("barrel",0,0,0,0)])
-p2 = Player(2, 2,"renegade" , "", [Card("back-playing",0,0,0,0),Card("bang",0,0,0,0),Card("barrel",0,0,0,0)])
-p3 = Player(3, 2,"sheriff" , "", [Card("back-playing",0,0,0,0),Card("bang",0,0,0,0),Card("barrel",0,0,0,0)])
-p4 = Player(4, 2,"vice" , "", [Card("back-playing",0,0,0,0),Card("bang",0,0,0,0),Card("barrel",0,0,0,0)])
+def update_player(self, player):
+    index = self.board.player_dict[player.player_number]
+    if index == 0:
+        self.update_card(self.board.UI_dict[index][0], Card(player.field.role, 0, 0, 0, 0))  # not yet
+        self.update_card(self.board.UI_dict[index][1], player.field.equipmentCards)
+        self.update_card(self.board.UI_dict[index][2], player.field.gunCard)
+        self.update_card(self.board.UI_dict[index][3], Card(str(player.field.bullets), 0, 0, 0, 0))
+        for i, card in enumerate(player.cards):
+            self.update_card(self.board.UI_dict[index][4 + i], card)
+    else:
+        self.update_card(self.board.UI_dict[index][0], Card(str("Player" + str(player.player_number)), 0, 0, 0, 0))
+        self.update_card(self.board.UI_dict[index][1], Card(player.field.role, 0, 0, 0, 0))
+        self.update_card(self.board.UI_dict[index][2], player.field.equipmentCards)
+        self.update_card(self.board.UI_dict[index][3], Card(str(len(player.cards)), 0, 0, 0, 0))
+        self.update_card(self.board.UI_dict[index][4], player.field.gunCard)
+        self.update_card(self.board.UI_dict[index][5], Card(str(player.field.bullets), 0, 0, 0, 0))
 
 
+12: 57
+if player.field.role == "sheriff":
+    self.update_card(self.board.UI_dict[index][1], Card(player.field.role, 0, 0, 0, 0))
+else:
+    self.update_card(self.board.UI_dict[index][1], Card("ROLE_UNKNOWN", 0, 0, 0, 0))
+12: 57
+if player.field.role == "sheriff":
+    self.update_card(self.board.UI_dict[index][1], Card(player.field.role, 0, 0, 0, 0)) else:
+    self.update_card(self.board.UI_dict[index][1], Card("ROLE_UNKNOWN", 0, 0, 0, 0))
+12: 58
+if player.field.role == "sheriff":
+    self.update_card(self.board.UI_dict[index][1], Card(player.field.role, 0, 0, 0, 0))
+else:
+    self.update_card(self.board.UI_dict[index][1], Card("ROLE_UNKNOWN", 0, 0, 0, 0))
+12: 58
+아니
+다시적을께
+12: 58
+if player.field.role == "sheriff":
+    self.update_card(self.board.UI_dict[index][1], Card(player.field.role, 0, 0, 0, 0))
+else:
+    self.update_card(self.board.UI_dict[index][1], Card("ROLE_UNKNOWN", 0, 0, 0, 0))
+12: 58
 
 
-ui = DrawUi(3,[1,2,0,4])
-
-path = "./ImageAsset/cards/"
-file_list = os.listdir(path) + os.listdir(path) + os.listdir(path)
-
-class Card:
-    def __init__(self, name, type, number, trump_symbol, idx):
-        self.name = name
-        self.number = number
-        self.trump_symbol = trump_symbol
-        self.type = type
-        self.idx = idx
-    
-
-
-for i in range(20):
-    ui.update_card(i,Card(file_list[i].replace(".png",""),0,0,0,0))
-ui.update_player(p0)
-ui.update_player(p1)
-ui.update_player(p2)
-ui.update_player(p3)
-ui.update_player(p4)
-ui.draw_total()
-
-time.sleep(5000)
+def update_player(self, player):
+    index = self.board.player_dict[player.player_number]
+    if index == 0:
+        self.update_card(self.board.UI_dict[index][0], Card(player.field.role, 0, 0, 0, 0))  # not yet
+        self.update_card(self.board.UI_dict[index][1], player.field.equipmentCards)
+        self.update_card(self.board.UI_dict[index][2], player.field.gunCard)
+        self.update_card(self.board.UI_dict[index][3], Card(str(player.field.bullets), 0, 0, 0, 0))
+        for i, card in enumerate(player.cards):
+            self.update_card(self.board.UI_dict[index][4 + i], card)
+    else:
+        self.update_card(self.board.UI_dict[index][0], Card(str("Player" + str(player.player_number)), 0, 0, 0, 0))
+        if player.field.role == "sheriff":
+            self.update_card(self.board.UI_dict[index][1], Card(player.field.role, 0, 0, 0, 0))
+        else:
+            self.update_card(self.board.UI_dict[index][1], Card("ROLE_UNKNOWN", 0, 0, 0, 0))
+        self.update_card(self.board.UI_dict[index][2], player.field.equipmentCards)
+        self.update_card(self.board.UI_dict[index][3], Card(str(len(player.cards)), 0, 0, 0, 0))
+        self.update_card(self.board.UI_dict[index][4], player.field.gunCard)
+        self.update_card(self.board.UI_dict[index][5], Card(str(player.field.bullets), 0, 0, 0, 0))

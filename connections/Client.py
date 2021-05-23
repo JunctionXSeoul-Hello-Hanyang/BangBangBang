@@ -30,7 +30,22 @@ card_use_button = None # 오른쪽 card의 use button
 right_card_idx = -1 # 오른쪽에 card의 deck_idx
 
 
-
+def victoryConditions(board):
+    dieRole = []
+    for player in board.players:
+        if player.field.bullets <= 0:
+            dieRole.append(player.field.role)
+    # 배신자 승리
+    if dieRole.count('renegade') == 0 and len(dieRole) == 4:
+        return 'renegade'
+    #무법자 승릐
+    elif dieRole.count('sheriff') == 1:
+        return 'outlaw'
+    #보안관 부곤 승리
+    elif dieRole.count('renegade') == 1 and dieRole.count('outlaw') == 2:
+        return 'sheriff and deputy'
+    else:
+        return None
 
 def available_player(board, right_card_idx, my_player_number, target_player_number):
     # bang일때 장착한 권총 사정거리를 벗어나면 False return
@@ -125,6 +140,14 @@ def useCardOnRight(board, idx):
 def display_update(board, cards, turn_change = 0):
     cards.clear()
     players.clear()
+
+    win_role = victoryConditions(board)
+    if win_role != None:
+        if win_role == board.players[my_player_number].feild.role:
+            drawUI.popUp('WIN!!!')
+        else:
+            drawUI.popUp('LOSE...')
+
     # 턴이 바뀐 시점에 rightImage 자리에 'yourTurn.png'를 켜준다.
     if turn_change == 1:
         drawUI.update_card(37, Card('yourTurn', 0, 0, 0, 0))
