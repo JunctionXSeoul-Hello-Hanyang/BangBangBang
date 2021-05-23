@@ -7,7 +7,7 @@ from Rule import Board
 from Rule import Setting
 
 from UI import DrawUi
-
+import time
 
 '''
 width = 500
@@ -118,6 +118,7 @@ def display_update(board, cards):
     cards.clear()
     players.clear()
     # 상대방의 상태 update(Player 객체를 통해)
+    drawUI.update_player(board.players[my_player_number])
     for other_person in other_player:
         drawUI.update_player(board.players[other_person])
 
@@ -155,6 +156,7 @@ if __name__ == "__main__":
     print(board.phase)
     drawUI = DrawUi.DrawUi(my_player_number, other_player)
     display_update(board, cards)
+    phase = board.phase
     card_use_button = drawUI.rects[38]
     turn_over_button = drawUI.rects[39]
 
@@ -171,11 +173,11 @@ if __name__ == "__main__":
             if board.whoseTurn == my_player_number:
 
                 # phase2 (use card)
-                if board.phase == '2':
+                if phase == '2':
                     if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                         # turn over button
                         if turn_over_button.collidepoint(event.pos):
-                            board.phase = '3'
+                            phase = '3'
                         # card use button
                         elif card_use_button.collidepoint(event.pos):
                             print('click')
@@ -190,26 +192,29 @@ if __name__ == "__main__":
                                 right_card_idx = showCardOnRight(board, i, cards)
 
                 # phase 3 (exceed card)
-                elif board.phase == '3':
+                elif phase == '3':
                     if len(board.players[my_player_number].cards) > board.players[my_player_number].field.bullets:
                         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                             for idx, card in enumerate(cards):
                                 if card.collidepoint(event.pos):
                                     card_idx = board.players[my_player_number].cards[idx].idx
-                                    print(len(board.players[my_player_number].cards))
                                     board = network.send('discard {}'.format(card_idx))
-                                    print(len(board.players[my_player_number].cards))
                                     display_update(board, cards)
 
                     else:
                         board = network.send('turn over')  # turn over
                         display_update(board, cards)
+                        phase = board.phase
+            else:
+                time.sleep(1)
+                board = network.send('update')
 
-            elif event.type == pygame.QUIT:
+            if event.type == pygame.QUIT:
                 run = False
                 pygame.quit()
                 network.close()
                 print('Quit')
+
 
 
 
