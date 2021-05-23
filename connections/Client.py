@@ -62,6 +62,7 @@ def select_target_card(board, card_idx, my_player_number):
                 for i, player in enumerate(players):
                     if player.collidepoint(event.pos) and available_player(board, card_idx, my_player_number, i):
                         player_idx = other_player[i]
+                        print(player_idx)
     pick_card = random.choice(board.players[player_idx].cards)
     print('pick_card: ', pick_card.idx)
     return pick_card.idx
