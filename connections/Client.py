@@ -33,6 +33,7 @@ def available_player(board, right_card_idx, my_player_number, target_player_numb
     # bang일때 장착한 권총 사정거리를 벗어나면 False return
     distance = min(abs(my_player_number - target_player_number), abs(target_player_number - my_player_number))
     if Setting.PLAYING_CARD[right_card_idx][0] == 'bang':
+        print(distance)
         if distance > Setting.GUN_RANGE[board.players[my_player_number].field.gunCard.name]:
             return False
     elif Setting.PLAYING_CARD[right_card_idx][0] == 'panic':
@@ -49,7 +50,7 @@ def select_target_player(board, card_idx, my_player_number):
         for event in pygame.event.get():
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 for i, player in enumerate(players):
-                    if player.collidepoint(event.pos) and available_player(board, card_idx, my_player_number, i):
+                    if player.collidepoint(event.pos) and available_player(board, card_idx, my_player_number, other_player[i]):
                         player_idx = other_player[i]
     return player_idx
 
