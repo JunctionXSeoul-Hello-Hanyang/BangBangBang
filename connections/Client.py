@@ -161,7 +161,11 @@ if __name__ == "__main__":
 
     while run:
         clock.tick(60)
-        #board = network.send('update')
+        if board.whoseTurn != my_player_number :
+            prev = board.whoseTurn
+            board = network.send('update')
+            if board.whoseTurn != prev:
+                display_update(board, cards)
 
         for event in pygame.event.get():
             if board.whoseTurn == my_player_number:
