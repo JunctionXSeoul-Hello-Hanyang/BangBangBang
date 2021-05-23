@@ -47,6 +47,8 @@ ui.update_player(p1)
 ui.update_player(p2)
 ui.update_player(p3)
 ui.update_player(p4)
+
+ui.highlight(5)
 ui.draw_total()
 
 time.sleep(5000)

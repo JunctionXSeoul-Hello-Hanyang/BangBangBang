@@ -27,7 +27,18 @@ class DrawUi:
         
     def update_card(self,index,card):
         self.board.boardSection[index].card = card
-
+    
+    def highlight(self,index):
+        
+        image = pygame.image.load(self.cards_path + "highlight" + '.png')                
+        box = self.board.boardSection[index].boardLocation
+        image = pygame.transform.scale(image, (box.width, box.height))
+        rect = image.get_rect()
+        rect.center = (box.centerX,box.centerY)
+        self.rects[box.sectionNumber] = rect
+        
+ 
+        self.screen.blit(image, rect)
         
     def update_player(self,player):
         index = self.board.player_dict[player.player_number]
@@ -61,14 +72,7 @@ class DrawUi:
         rect.center = (box.centerX,box.centerY)
         self.rects[box.sectionNumber] = rect
         
-        
-        
-        print(rect)
-        
-        
-        
-        
-        
+ 
         self.screen.blit(image, rect)
     
     def draw_total(self):
