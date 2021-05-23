@@ -184,8 +184,8 @@ board = 0
 turn = 0
 if __name__ == "__main__":
     run = True
-    #network = Network("18.191.254.252", 5555)
-    network = Network("127.0.0.1", 5555)
+    network = Network("18.191.254.252", 5556)
+    #network = Network("127.0.0.1", 5555)
     my_player_number = int(network.id)
     del other_player[my_player_number]
     clock = pygame.time.Clock()
@@ -244,6 +244,8 @@ if __name__ == "__main__":
 
                     else:
                         board = network.send('turn over')  # turn over
+                        cnt['bang'] = 0
+                        cnt['gun'] = 0
                         display_update(board, cards)
                         phase = board.phase
 
