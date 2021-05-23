@@ -18,8 +18,7 @@ pygame.display.set_caption("Client")
 clientNumber = 0
 my_player_number = 0
 
-cnt_gun = 0
-cnt_bang = 0
+cnt = {'gun': 0, 'bang': 0}
 
 drawUI = None
 other_player = [i for i in range(5)] # 나를 제외한 player의 number
@@ -33,7 +32,6 @@ def available_player(board, right_card_idx, my_player_number, target_player_numb
     # bang일때 장착한 권총 사정거리를 벗어나면 False return
     distance = min(abs(my_player_number - target_player_number), abs(target_player_number - my_player_number))
     if Setting.PLAYING_CARD[right_card_idx][0] == 'bang':
-        print(distance)
         if distance > Setting.GUN_RANGE[board.players[my_player_number].field.gunCard.name]:
             return False
     elif Setting.PLAYING_CARD[right_card_idx][0] == 'panic':
@@ -69,7 +67,7 @@ def select_target_card(board, card_idx, my_player_number):
     return pick_card.idx
 
 def showCardOnRight(board, idx, cards):
-    print('show')
+    print('showCardOnRight')
     card = board.players[my_player_number].cards[idx]
 
     drawUI.update_card(37, card)
@@ -80,12 +78,15 @@ def showCardOnRight(board, idx, cards):
 # use card right
 # 예외 처리 중요 ex) 총 장착 여러개 안됨, bang 여러개 사용 못함
 def useCardOnRight(board, idx):
-    result = ''
+    result = -1
     card = Setting.PLAYING_CARD[idx]
-    print(card)
     if card[0] == 'bang':
-        target_player_idx = select_target_player(board, idx, my_player_number)
-        result = 'bang {} {}'.format(idx, target_player_idx)
+        if cnt['bang'] <1:
+            target_player_idx = select_target_player(board, idx, my_player_number)
+            result = 'bang {} {}'.format(idx, target_player_idx)
+            cnt['bang'] +=1
+        else:
+            drawUI.popUp('You already used a bang card this turn.')
     elif card[0] == 'missed':
         result = -1
     elif card[0] == 'beer':
@@ -99,14 +100,12 @@ def useCardOnRight(board, idx):
         result = 'gatling {}'.format(idx)
     elif card[0] == 'saloon':
         result = 'saloon {}'.format(idx)
-    #####################################################################
     elif card[0] == 'panic':
         target_card_idx = select_target_card(board, idx, my_player_number)
-        result = 'panic {}'.format(idx, target_card_idx)
+        result = 'panic {} {}'.format(idx, target_card_idx)
     elif card[0] == 'catBalu':
         target_card_idx = select_target_card(board, idx, my_player_number)
-        result = 'catBalu {}'.format(idx, target_card_idx)
-    ########################################################
+        result = 'catBalu {} {}'.format(idx, target_card_idx)
     elif card[0] == 'generalStore':
         result = 'generalStore {}'.format(idx)
     elif card[0] == 'stagecoach':
