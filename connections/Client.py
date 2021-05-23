@@ -118,6 +118,7 @@ def display_update(board, cards):
     cards.clear()
     players.clear()
     # 상대방의 상태 update(Player 객체를 통해)
+    drawUI.update_player(board.players[my_player_number])
     for other_person in other_player:
         drawUI.update_player(board.players[other_person])
 
