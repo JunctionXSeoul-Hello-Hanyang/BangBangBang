@@ -27,13 +27,6 @@ board = None
 
 # 차례를 넘길 시 시행하는 함수
 def turnover():
-    cards = board.players[board.whoseTurn].cards
-    while len(cards) > board.players[board.whoseTurn].field.bullets:
-        random.shuffle(cards)
-        cards.pop()
-
-
-
     nextTurn = board.whoseTurn + 1;
     for _ in range(4):
         if nextTurn == 5:
@@ -43,6 +36,7 @@ def turnover():
         if player.field.bullets > 0:
             board.whoseTurn = nextTurn
             break
+        nextTurn += 1
     drawCard()
     drawCard()
 
@@ -66,6 +60,7 @@ def drawCard():
 # 매개변수의 경우 카드의 유니크 idx를 받는다.
 def handleAfterCardUsase(cardIdx):
     curPlayer = board.players[board.whoseTurn]
+
     for idx, card in enumerate(curPlayer.cards):
         if card.idx == cardIdx:
             board.trashCan.append(card) # 버려질 쓰레기통에 카드 삽입
@@ -100,7 +95,8 @@ def threaded_client(conn, currentPlayer):
             else:
                 handle(reply)
 
-            print(reply)
+            if not reply == 'update' :
+                print(reply)
 
             conn.send(pickle.dumps(board))
 
@@ -115,17 +111,17 @@ def threaded_client(conn, currentPlayer):
 def handle(reply):
     splitedCmd = reply.split(' ')
     
-    usedCardIdx = splitedCmd[1]
+    usedCardIdx = int(splitedCmd[1])
 
     if splitedCmd[0] == 'bang':
-        enemyPlayerIdx = splitedCmd[2]
+        enemyPlayerIdx = int(splitedCmd[2])
         actionBang(enemyPlayerIdx)
 
     elif splitedCmd[0] == 'beer':
         actionBeer()
 
     elif splitedCmd[0] == 'duel':
-        enemyPlayerIdx = splitedCmd[2]
+        enemyPlayerIdx = int(splitedCmd[2])
         actionDuel(enemyPlayerIdx)
 
     elif splitedCmd[0] == 'indian':
@@ -138,11 +134,11 @@ def handle(reply):
         actionSaloon()
 
     elif splitedCmd[0] == 'panic':
-        cardIndex = splitedCmd[2]
+        cardIndex = int(splitedCmd[2])
         actionPanic(cardIndex)
 
     elif splitedCmd[0] == 'catBalu':
-        cardIndex = splitedCmd[2]
+        cardIndex = int(splitedCmd[2])
         actionCalbalou(cardIndex)
 
     elif splitedCmd[0] == 'generalStore':
