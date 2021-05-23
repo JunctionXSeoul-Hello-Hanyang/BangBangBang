@@ -30,7 +30,7 @@ right_card_idx = -1 # 오른쪽에 card의 deck_idx
 
 def available_player(board, right_card_idx, my_player_number, target_player_number):
     # bang일때 장착한 권총 사정거리를 벗어나면 False return
-    distance = min(abs(my_player_number - target_player_number), abs(target_player_number - my_player_number))
+    distance = min(abs(my_player_number - target_player_number), abs(5-abs(target_player_number - my_player_number)))
     if Setting.PLAYING_CARD[right_card_idx][0] == 'bang':
         if distance > Setting.GUN_RANGE[board.players[my_player_number].field.gunCard.name]:
             return False
@@ -154,7 +154,6 @@ if __name__ == "__main__":
     clock = pygame.time.Clock()
 
     board = network.send('update')
-    print(board.phase)
     drawUI = DrawUi.DrawUi(my_player_number, other_player)
     display_update(board, cards)
     phase = board.phase
