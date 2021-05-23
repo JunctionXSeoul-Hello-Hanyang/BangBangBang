@@ -7,7 +7,7 @@ from Rule import Board
 from Rule import Setting
 
 from UI import DrawUi
-
+import time
 
 '''
 width = 500
@@ -125,7 +125,6 @@ def display_update(board, cards):
     # 자신의 패 update
     for i, card in enumerate(board.players[my_player_number].cards):
         idx = 28 + i
-        print(i)
         drawUI.update_card(idx, card)
     drawUI.draw_total()
 
@@ -195,21 +194,23 @@ if __name__ == "__main__":
                             for idx, card in enumerate(cards):
                                 if card.collidepoint(event.pos):
                                     card_idx = board.players[my_player_number].cards[idx].idx
-                                    print(len(board.players[my_player_number].cards))
                                     board = network.send('discard {}'.format(card_idx))
-                                    print(len(board.players[my_player_number].cards))
                                     display_update(board, cards)
 
                     else:
                         board = network.send('turn over')  # turn over
                         display_update(board, cards)
                         phase = board.phase
+            else:
+                time.sleep(1)
+                board = network.send('update')
 
-            elif event.type == pygame.QUIT:
+            if event.type == pygame.QUIT:
                 run = False
                 pygame.quit()
                 network.close()
                 print('Quit')
+
 
 
 
