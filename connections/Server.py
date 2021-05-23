@@ -95,7 +95,8 @@ def threaded_client(conn, currentPlayer):
             else:
                 handle(reply)
 
-            print(reply)
+            if not reply == 'update' :
+                print(reply)
 
             conn.send(pickle.dumps(board))
 
